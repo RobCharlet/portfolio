@@ -1,7 +1,7 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import styled from '@emotion/styled';
-import { graphql, useStaticQuery } from 'gatsby';
 import { colors } from '../utils/styles';
 
 // Background Image
@@ -55,7 +55,7 @@ const Hero = () => {
     query {
       image: file(relativePath: { eq: "sniff-outdoors-header.jpg" }) {
         sharp: childImageSharp {
-          fluid {
+          fluid(quality: 90) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }

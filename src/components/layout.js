@@ -56,7 +56,7 @@ const Layout = ({ children }) => {
         <title></title>
         <meta name="description" content="" />
       </Helmet>
-      <main css={css``}>{children}</main>
+      <div css={css``}>{children}</div>
     </>
   );
 };
