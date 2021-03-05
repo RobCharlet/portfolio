@@ -16,6 +16,7 @@ module.exports = {
     'gatsby-plugin-offline',
     'gatsby-plugin-mdx',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-dark-mode',
     {
       resolve: 'gatsby-source-filesystem',
       options: {

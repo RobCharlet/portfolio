@@ -1,7 +1,7 @@
 import { css, Global } from '@emotion/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { colors, fonts } from '../utils/styles';
+import { colors, darkColors, fonts } from '../utils/styles';
 
 const Layout = ({ children }) => {
   return (
@@ -20,11 +20,15 @@ const Layout = ({ children }) => {
             font-family: ${fonts.body};
             font-size: 18px;
             line-height: 1.4;
-
-            /** remove margin for the main div gatsby mounts into */
-            > div {
+            background-color: ${colors.background}
+              /** remove margin for the main div gatsby mounts into */ > div {
               margin-top: 0;
             }
+          }
+
+          body.dark {
+            color: ${darkColors.text};
+            background-color: ${darkColors.background};
           }
 
           h1,

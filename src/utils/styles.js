@@ -1,7 +1,31 @@
 export const colors = {
-  brand: "#da0013",
-  text: "#232129"
-}
+  brand: '#da0013',
+  brandDark: '#ce0013',
+  bluePrimary: '#00DAC7',
+  text: '#232129',
+  background: '#FFF',
+};
+
+export const darkColors = {
+  brand: '#da0013',
+  bluePrimary: '#da0013',
+  text: '#fff',
+  background: '#232129',
+};
+
+export const radialGrandient = [
+  'ellipse at center',
+  'rgba(0, 0, 0, 0) 0%',
+  'rgba(0, 0, 0, 0) 37%',
+  'rgba(0, 0, 0, 0.65) 100%',
+].join();
+
+export const darkRadialGrandient = [
+  'ellipse at center',
+  'rgba(255, 255, 255, 255) 0%',
+  'rgba(255, 255, 255, 255) 37%',
+  'rgba(255, 255, 255, 0.2) 100%',
+].join();
 
 export const defaultFontStack = [
   '-apple-system',
@@ -13,7 +37,7 @@ export const defaultFontStack = [
   'Cantarell',
   'Open Sans',
   'Helvetica Neue',
-  'sans-serif'
+  'sans-serif',
 ].join();
 
 const monospaceFontStack = [
@@ -24,11 +48,11 @@ const monospaceFontStack = [
   `Consolas`,
   `Liberation Mono`,
   `Courier New`,
-  `monospace`
+  `monospace`,
 ].join();
 
 export const fonts = {
   body: defaultFontStack,
   heading: `Futura PT, ${defaultFontStack}`,
-  monospace: monospaceFontStack
+  monospace: monospaceFontStack,
 };

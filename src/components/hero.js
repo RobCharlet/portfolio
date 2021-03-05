@@ -2,7 +2,10 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import styled from '@emotion/styled';
-import { colors } from '../utils/styles';
+import { colors, radialGrandient, darkRadialGrandient } from '../utils/styles';
+import { ThemeToggler } from 'gatsby-plugin-dark-mode';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 // Background Image
 const BackgroundSection = styled(BackgroundImage)`
@@ -14,24 +17,23 @@ const BackgroundSection = styled(BackgroundImage)`
   }
 `;
 
-const TextBox = styled('div')`
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) 37%,
-    rgba(0, 0, 0, 0.65) 100%
-  );
+const TextBox = styled('header')`
+  background: radial-gradient(${radialGrandient});
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: flex-end;
   padding: 0 calc((100vw - 550px) / 2) 2rem;
 
+  .dark & {
+    background: radial-gradient(${darkRadialGrandient});
+  }
+
   h1 {
     font-style: normal;
     font-weight: bold;
     text-transform: uppercase;
-    color: #da0013;
+    color: ${colors.bluePrimary};
     font-size: 11vmin;
     letter-spacing: 0.03em;
     line-height: 1;
@@ -41,12 +43,19 @@ const TextBox = styled('div')`
 
   p,
   a {
-    color: ${colors.text};
+    color: ${colors.brand};
     margin-top: 0;
   }
 
   a {
     margin-top: 0.5rem;
+  }
+
+  .dark {
+    p,
+    a {
+      color: ${colors.brandDark};
+    }
   }
 `;
 
@@ -64,10 +73,24 @@ const Hero = () => {
   `);
 
   return (
-    <BackgroundSection fluid={image.sharp.fluid}>
+    <BackgroundSection tag="header" fluid={image.sharp.fluid}>
       <TextBox>
         <h1>Robin Charlet</h1>
         <p>Hello Minnesota Learn about me</p>
+        <ThemeToggler>
+          {({ theme, toggleTheme }) => (
+            <div className={colors.toggleTheme}>
+              <FontAwesomeIcon
+                icon={faMoon}
+                onClick={() =>
+                  theme === 'dark' ? toggleTheme('light') : toggleTheme('dark')
+                }
+              >
+                Toggle mode
+              </FontAwesomeIcon>
+            </div>
+          )}
+        </ThemeToggler>
       </TextBox>
     </BackgroundSection>
   );
