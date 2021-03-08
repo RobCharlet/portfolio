@@ -1,15 +1,19 @@
 import React from 'react';
+import { css } from '@emotion/react';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Layout from '../components/layout';
+import { mq } from '../utils/styles';
+import ContactForm from '../components/contact';
 
 // markup
 const IndexPage = () => {
   return (
-    <Layout>
+    <>
       <Hero />
-      <main>
+      <Layout>
         <section>
+          <h2>Présentation</h2>
           <p>
             Développeur web depuis 2004, je suis spécialisé dans le Front-End,
             le Responsive Design et le mobile. Je prends part à toutes les
@@ -19,9 +23,46 @@ const IndexPage = () => {
             supports numériques actuels, du smartphone à l'écran ultra HD.
           </p>
         </section>
-      </main>
+        <section
+          css={css`
+            .skills {
+              ${mq[0]} {
+                display: flex;
+                flex-flow: row wrap;
+              }
+
+              li {
+                list-style: none;
+                margin: 7px;
+                padding: 5px 10px;
+                color: #374054;
+                background: #e4e4ea;
+
+                ${mq[0]} {
+                  flex: auto;
+                }
+              }
+            }
+          `}
+        >
+          <h2>Compétences</h2>
+          <ul class="skills">
+            <li>Symfony 3-5</li>
+            <li>Drupal 7-9</li>
+            <li>ReactJS</li>
+            <li>Gatsby</li>
+            <li>VueJS</li>
+            <li>Javascript</li>
+            <li>PHP</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Contactez moi</h2>
+          <ContactForm />
+        </section>
+      </Layout>
       <Footer />
-    </Layout>
+    </>
   );
 };
 

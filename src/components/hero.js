@@ -76,7 +76,7 @@ const Hero = () => {
     <BackgroundSection tag="header" fluid={image.sharp.fluid}>
       <TextBox>
         <h1>Robin Charlet</h1>
-        <p>Hello Minnesota Learn about me</p>
+        <p>Développeur Full Stack</p>
         <ThemeToggler>
           {({ theme, toggleTheme }) => (
             <div className={colors.toggleTheme}>

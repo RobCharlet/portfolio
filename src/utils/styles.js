@@ -1,3 +1,4 @@
+/** Colors */
 export const colors = {
   brand: '#da0013',
   brandDark: '#ce0013',
@@ -27,6 +28,7 @@ export const darkRadialGrandient = [
   'rgba(255, 255, 255, 0.2) 100%',
 ].join();
 
+/** Fonts */
 export const defaultFontStack = [
   '-apple-system',
   'BlinkMacSystemFont',
@@ -56,3 +58,7 @@ export const fonts = {
   heading: `Futura PT, ${defaultFontStack}`,
   monospace: monospaceFontStack,
 };
+
+/** Media queries */
+const breakpoints = [576, 768, 992, 1200];
+export const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);

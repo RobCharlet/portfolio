@@ -57,10 +57,18 @@ const Layout = ({ children }) => {
       />
       <Helmet>
         <html lang="fr" />
-        <title></title>
-        <meta name="description" content="" />
+        <title>Robin Charlet</title>
+        <meta name="description" content="Développeur Full Stack" />
       </Helmet>
-      <div css={css``}>{children}</div>
+      <main
+        css={css`
+          margin: 2rem auto 4rem;
+          max-width: 90vw;
+          width: 780px;
+        `}
+      >
+        {children}
+      </main>
     </>
   );
 };
