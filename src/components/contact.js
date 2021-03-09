@@ -2,25 +2,17 @@ import React from 'react';
 
 const ContactForm = () => {
   return (
-    <form method="post" action="#">
-      <label>
-        Name
-        <input type="text" name="name" id="name" />
-      </label>
-      <label>
-        Email
-        <input type="email" name="email" id="email" />
-      </label>
-      <label>
-        Subject
-        <input type="text" name="subject" id="subject" />
-      </label>
-      <label>
-        Message
-        <textarea name="message" id="message" rows="5" />
-      </label>
+    <form method="post" action="http://localhost:3000/contact">
+      <label htmlFor="name">Name:</label>
+      <input id="name" type="text" autocomplete="name" />
+      <label htmlFor="email">Email:</label>
+      <input email id="email" type="text" autocomplete="email" />
+      <label htmlFor="subject">Email:</label>
+      <input id="subject" type="text" autocomplete="subject" />
+      <label htmlFor="message">Enter your message:</label>
+      <textarea id="message" autocomplete="message"></textarea>
       <button type="submit">Send</button>
-      <input type="reset" value="Clear" />
+      <input type="reset" name="reset" value="Clear" />
     </form>
   );
 };
