@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContactForm = () => {
   return (
-    <form method="post" action="http://localhost:3000/contact">
+    <form method="post" action="/contact">
       <label htmlFor="name">Name:</label>
       <input id="name" type="text" autocomplete="name" />
       <label htmlFor="email">Email:</label>
