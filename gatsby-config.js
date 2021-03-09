@@ -36,6 +36,9 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
+        siteMetadata: {
+          siteUrl: process.env.GATSBY_URL,
+        },
         policy: [{ userAgent: '*', disallow: ['/'] }],
       },
     },
