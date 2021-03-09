@@ -2,6 +2,7 @@ module.exports = {
   siteMetadata: {
     title: 'Robin Charlet',
     description: 'Développeur Full Stack',
+    siteUrl: 'http://178.32.222.185',
   },
   plugins: [
     'gatsby-plugin-emotion',
@@ -36,9 +37,6 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        siteMetadata: {
-          siteUrl: process.env.GATSBY_URL,
-        },
         policy: [{ userAgent: '*', disallow: ['/'] }],
       },
     },
