@@ -1,90 +1,152 @@
-import React from 'react';
-import { css } from '@emotion/react';
-import { mq } from '../utils/styles';
+import React, { useState } from 'react';
+import axios from 'axios';
+import styled from '@emotion/styled';
+import {
+  Form,
+  Fieldset,
+  HalfField,
+  FullField,
+  Input,
+  Label,
+  Textarea,
+  Submit,
+} from './shared/FormElements';
+import { spacing } from '../utils/styles';
 
 const ContactForm = () => {
+  const [serverState, setServerState] = useState({
+    submitting: false,
+    status: null,
+  });
+
+  const [data, setData] = useState({
+    name: '',
+    mail: '',
+    subject: '',
+    text: '',
+  });
+
+  const Errors = styled(`div`)`
+    display: ${(props) => (props.show ? 'flex' : 'none')};
+    flex-direction: row;
+    margin-bottom: ${spacing.xs}px;
+    width: 100%;
+  `;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const resetForm = () => {
+    setData({ name: '', mail: '', subject: '', text: '' });
+  };
+
+  const handleServerResponse = (ok, msg) => {
+    setServerState({
+      submitting: false,
+      status: { ok, msg },
+    });
+    if (ok) {
+      setTimeout(() => {
+        resetForm();
+      }, 6000);
+    }
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    setData({
+      ...data,
+      buttonText: 'Sending...',
+    });
+
+    setServerState({ submitting: true });
+
+    axios
+      .post('http://localhost:3000/contact', data)
+      .then((r) => {
+        handleServerResponse(true, 'Thanks!', data);
+      })
+      .catch((r) => {
+        handleServerResponse(false, r.response.data.error, data);
+      });
+  };
+
   return (
-    <form
-      method="post"
-      action="https://getform.io/f/f546bb5f-57b7-4fa3-9cc9-2be7bb2798ff"
-      css={css`
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 1.5rem;
+    <Form onSubmit={handleOnSubmit}>
+      {/* <Errors>
+        {serverState.status && (
+          <p className={!serverState.status.ok ? 'errorMsg' : ''}>
+            {serverState.status.msg}
+          </p>
+        )}
+      </Errors> */}
 
-        div {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          margin-bottom: 1rem;
-        }
+      <Fieldset>
+        <HalfField>
+          <Label htmlFor="name" required="required">
+            Nom
+          </Label>
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            required="required"
+            value={data.name}
+            onChange={handleChange}
+          />
+        </HalfField>
+        <HalfField>
+          <Label htmlFor="mail">Courriel</Label>
+          <Input
+            type="email"
+            name="mail"
+            id="mail"
+            required="required"
+            value={data.mail}
+            onChange={handleChange}
+          />
+        </HalfField>
+        <FullField>
+          <Label htmlFor="subject" required="required">
+            Sujet
+          </Label>
+          <Input
+            type="text"
+            name="subject"
+            id="subject"
+            required="required"
+            value={data.subject}
+            onChange={handleChange}
+          />
+        </FullField>
+        <FullField>
+          <Label htmlFor="text">Votre message</Label>
+          <Textarea
+            name="text"
+            id="text"
+            rows="6"
+            required="required"
+            value={data.text}
+            onChange={handleChange}
+          ></Textarea>
+        </FullField>
 
-        input,
-        textarea {
-          border-width: 1px;
-          padding-top: 0.5rem;
-          padding-bottom: 0.5rem;
-          padding-left: 0.75rem;
-          padding-right: 0.75rem;
-          color: #3d4852;
-        }
-
-        label {
-          text-transform: uppercase;
-          font-weight: 700;
-          font-size: 1.125rem;
-          color: #3d4852;
-          margin-bottom: 0.5rem;
-        }
-
-        button {
-          display: block;
-          color: #ffffff;
-          background-color: #4dc0b5;
-          text-transform: uppercase;
-          font-size: 1.125rem;
-          padding: 1rem;
-          margin-left: auto;
-          margin-right: auto;
-          border-radius: 0.25rem;
-
-          &:hover {
-            background-color: #38a89d;
-          }
-        }
-
-        .half {
-          width: 100%;
-          ${mq[1]} {
-            width: 48%;
-          }
-        }
-
-        .full {
-          width: 100%;
-        }
-      `}
-    >
-      <div class="half">
-        <label htmlFor="name">Nom</label>
-        <input id="name" type="text" autocomplete="name" />
-      </div>
-      <div class="half">
-        <label htmlFor="email">Courriel</label>
-        <input email id="email" type="text" autocomplete="email" />
-      </div>
-      <div class="full">
-        <label htmlFor="subject">Sujet</label>
-        <input id="subject" type="text" autocomplete="subject" />
-      </div>
-      <div class="full">
-        <label htmlFor="message">Votre message</label>
-        <textarea id="message" autocomplete="message" rows="6"></textarea>
-      </div>
-
-      <button type="submit">Envoyer</button>
-    </form>
+        <Submit type="submit" disabled={serverState.submitting}>
+          Envoyer
+        </Submit>
+      </Fieldset>
+      {serverState.status && (
+        <p className={!serverState.status.ok ? 'errorMsg' : ''}>
+          {serverState.status.msg}
+        </p>
+      )}
+    </Form>
   );
 };
 

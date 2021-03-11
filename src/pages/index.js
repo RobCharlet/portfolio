@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Layout from '../components/layout';
-import { mq } from '../utils/styles';
 import ContactForm from '../components/contact';
 
 // markup
@@ -26,10 +25,8 @@ const IndexPage = () => {
         <section
           css={css`
             .skills {
-              ${mq[0]} {
-                display: flex;
-                flex-flow: row wrap;
-              }
+              display: flex;
+              flex-flow: row wrap;
 
               li {
                 list-style: none;
@@ -37,16 +34,13 @@ const IndexPage = () => {
                 padding: 5px 10px;
                 color: #374054;
                 background: #e4e4ea;
-
-                ${mq[0]} {
-                  flex: auto;
-                }
+                flex: auto;
               }
             }
           `}
         >
           <h2>Compétences</h2>
-          <ul class="skills">
+          <ul className="skills">
             <li>Symfony 3-5</li>
             <li>Drupal 7-9</li>
             <li>ReactJS</li>

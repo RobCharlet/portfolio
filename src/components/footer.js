@@ -12,7 +12,7 @@ const FooterSection = styled('footer')`
 const Footer = () => {
   return (
     <FooterSection>
-      <p class="copyright">
+      <p className="copyright">
         <small>© Copyright Robin Charlet 2021. Tous droits réservés.</small>
       </p>
     </FooterSection>

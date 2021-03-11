@@ -5,6 +5,8 @@ export const colors = {
   bluePrimary: '#00DAC7',
   text: '#232129',
   background: '#FFF',
+  accent: '#ffb238',
+  error: '#ec1818',
 };
 
 export const darkColors = {
@@ -12,6 +14,8 @@ export const darkColors = {
   bluePrimary: '#da0013',
   text: '#fff',
   background: '#232129',
+  accent: '#ffb238',
+  error: '#ec1818',
 };
 
 export const radialGrandient = [
@@ -59,6 +63,28 @@ export const fonts = {
   monospace: monospaceFontStack,
 };
 
+export const spacing = {
+  '3xs': 2,
+  '2xs': 4,
+  xs: 8,
+  sm: 12,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  '2xl': 40,
+  '3xl': 48,
+};
+
+export const radius = {
+  default: 2,
+  large: 4,
+};
+
 /** Media queries */
-const breakpoints = [576, 768, 992, 1200];
-export const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
+export const breakpoints = {
+  mobile: 400,
+  phablet: 550,
+  tablet: 750,
+  desktop: 1000,
+  hd: 1300,
+};
