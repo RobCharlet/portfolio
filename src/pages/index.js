@@ -40,7 +40,7 @@ const IndexPage = () => {
     <>
       <Hero />
       <Layout>
-        <section>
+        <section id="presentation">
           <h2>Présentation</h2>
           <p>
             Développeur web depuis 2004, je suis spécialisé dans le Front-End,
@@ -51,7 +51,7 @@ const IndexPage = () => {
             supports numériques actuels, du smartphone à l'écran ultra HD.
           </p>
         </section>
-        <section>
+        <section id="skills">
           <h2>Compétences</h2>
           <Skills>
             <li>Symfony 3-5</li>
@@ -63,7 +63,7 @@ const IndexPage = () => {
             <li>PHP</li>
           </Skills>
         </section>
-        <section>
+        <section id="github">
           <h2>Repo github</h2>
           <RepoGithub>
             {githubs.map((repo) => (
@@ -71,12 +71,11 @@ const IndexPage = () => {
             ))}
           </RepoGithub>
         </section>
-        <section>
-          <h2>Contactez moi</h2>
+        <section id="contact">
+          <h2>Contactez-moi</h2>
           <ContactForm />
         </section>
       </Layout>
-      <Footer />
     </>
   );
 };

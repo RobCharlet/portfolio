@@ -2,6 +2,8 @@ import { css, Global } from '@emotion/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { colors, darkColors, fonts } from '../utils/styles';
+import Header from '../components/header';
+import Footer from './footer';
 
 const Layout = ({ children }) => {
   return (
@@ -11,6 +13,10 @@ const Layout = ({ children }) => {
           * {
             box-sizing: border-box;
             margin: 0;
+          }
+
+          html {
+            scroll-behavior: smooth;
           }
 
           html,
@@ -64,6 +70,7 @@ const Layout = ({ children }) => {
         <title>Robin Charlet</title>
         <meta name="description" content="Développeur Full Stack" />
       </Helmet>
+      <Header />
       <main
         css={css`
           margin: 2rem auto 4rem;
@@ -73,6 +80,7 @@ const Layout = ({ children }) => {
       >
         {children}
       </main>
+      <Footer />
     </>
   );
 };
