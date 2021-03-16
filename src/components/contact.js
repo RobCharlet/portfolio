@@ -67,6 +67,8 @@ const ContactForm = () => {
 
     setServerState({ submitting: true });
 
+    console.log(serverState);
+
     axios
       .post('http://localhost:3000/contact', data)
       .then((r) => {
@@ -79,13 +81,13 @@ const ContactForm = () => {
 
   return (
     <Form onSubmit={handleOnSubmit}>
-      {/* <Errors>
+      <Errors>
         {serverState.status && (
           <p className={!serverState.status.ok ? 'errorMsg' : ''}>
             {serverState.status.msg}
           </p>
         )}
-      </Errors> */}
+      </Errors>
 
       <Fieldset>
         <HalfField>

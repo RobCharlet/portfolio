@@ -8,9 +8,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const contactAdress = process.env.MAIL_CONTACT;
+const contactAdress = 'robin.charlet@laposte.net';
 
-console.log(process.env.MAIL_USER);
+console.log(
+  process.env.MAIL_USER,
+  process.env.MAIL_HOST,
+  process.env.MAIL_PORT,
+  process.env.MAIL_USER,
+  process.env.MAIL_PASSWORD,
+);
 
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,

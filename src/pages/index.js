@@ -1,12 +1,30 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import Layout from '../components/layout';
 import ContactForm from '../components/contact';
+import GithubRepo from '../components/github';
+import UseGithub from '../hooks/use-github';
 
 // markup
 const IndexPage = () => {
+  const Skills = styled(`ul`)`
+    display: flex;
+    flex-flow: row wrap;
+
+    li {
+      list-style: none;
+      margin: 7px;
+      padding: 5px 10px;
+      color: #374054;
+      background: #e4e4ea;
+      flex: auto;
+    }
+  `;
+
+  const githubs = UseGithub();
+
   return (
     <>
       <Hero />
@@ -22,25 +40,9 @@ const IndexPage = () => {
             supports numériques actuels, du smartphone à l'écran ultra HD.
           </p>
         </section>
-        <section
-          css={css`
-            .skills {
-              display: flex;
-              flex-flow: row wrap;
-
-              li {
-                list-style: none;
-                margin: 7px;
-                padding: 5px 10px;
-                color: #374054;
-                background: #e4e4ea;
-                flex: auto;
-              }
-            }
-          `}
-        >
+        <section>
           <h2>Compétences</h2>
-          <ul className="skills">
+          <Skills>
             <li>Symfony 3-5</li>
             <li>Drupal 7-9</li>
             <li>ReactJS</li>
@@ -48,7 +50,13 @@ const IndexPage = () => {
             <li>VueJS</li>
             <li>Javascript</li>
             <li>PHP</li>
-          </ul>
+          </Skills>
+        </section>
+        <section>
+          <h2>Repo github</h2>
+          {githubs.map((repo) => (
+            <GithubRepo key={repo.title} repo={repo} />
+          ))}
         </section>
         <section>
           <h2>Contactez moi</h2>
