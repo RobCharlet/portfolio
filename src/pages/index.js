@@ -12,6 +12,7 @@ const IndexPage = () => {
   const Skills = styled(`ul`)`
     display: flex;
     flex-flow: row wrap;
+    padding-left: 0;
 
     li {
       list-style: none;
@@ -20,6 +21,16 @@ const IndexPage = () => {
       color: #374054;
       background: #e4e4ea;
       flex: auto;
+    }
+  `;
+
+  const RepoGithub = styled(`ul`)`
+    display: flex;
+    flex-flow: row wrap;
+    padding-left: 0;
+    li {
+      list-style: none;
+      flex: 1 0 auto;
     }
   `;
 
@@ -54,9 +65,11 @@ const IndexPage = () => {
         </section>
         <section>
           <h2>Repo github</h2>
-          {githubs.map((repo) => (
-            <GithubRepo key={repo.title} repo={repo} />
-          ))}
+          <RepoGithub>
+            {githubs.map((repo) => (
+              <GithubRepo key={repo.title} repo={repo} />
+            ))}
+          </RepoGithub>
         </section>
         <section>
           <h2>Contactez moi</h2>

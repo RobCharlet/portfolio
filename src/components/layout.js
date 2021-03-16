@@ -46,8 +46,12 @@ const Layout = ({ children }) => {
             }
           }
 
-          strong {
+          h2 strong {
             color: #222;
+          }
+
+          section + section {
+            margin-top: 3rem;
           }
 
           li {

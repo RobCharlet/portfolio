@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const contactAdress = 'robin.charlet@laposte.net';
+const contactAdress = process.env.MAIL_CONTACT;
 
 console.log(
   process.env.MAIL_USER,

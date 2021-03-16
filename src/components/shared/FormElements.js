@@ -1,15 +1,21 @@
 import styled from '@emotion/styled';
-import { breakpoints, colors, radius, spacing } from '../../utils/styles';
+import {
+  breakpoints,
+  colors,
+  radius,
+  spacing,
+  defaultFontStack,
+} from '../../utils/styles';
 
 export const Form = styled(`form`)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: ${spacing['2xl']}px ${spacing.md}px 0;
+  /* padding: ${spacing['2xl']}px ${spacing.md}px 0; */
 
-  @media (min-width: ${breakpoints.tablet}px) {
+  /* @media (min-width: ${breakpoints.tablet}px) {
     padding: ${spacing['2xl']}px ${spacing.xl}px 0;
-  }
+  } */
 
   @media (min-width: ${breakpoints.desktop}px) {
     justify-content: flex-start;
@@ -18,55 +24,54 @@ export const Form = styled(`form`)`
 
 export const Input = styled(`input`)`
   display: block;
-  font-size: 1.1rem;
-  color: ${colors.text};
-  width: 100%;
-  background-color: ${colors.lightest};
-  border: 1px solid ${colors.brandBright};
-  border-radius: ${radius.default}px;
-  padding: ${spacing.sm}px ${spacing.md}px;
-
-  :focus {
-    box-shadow: 0 0 0 3px ${colors.accent};
-    outline: 0;
-    transition: box-shadow 0.15s ease-in-out;
-  }
-
-  /* display: block;
   width: 100%;
   height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.42857143;
-  color: #555555;
-  background-color: #ffffff;
-  background-image: none;
+  padding: ${spacing.sm}px ${spacing.md}px;
+  margin-bottom: 20px;
+  outline: none;
+
   border: 1px solid #cccccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-  -webkit-transition: border-color ease-in-out 0.15s,
-    -webkit-box-shadow ease-in-out 0.15s;
-  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  padding-left: 32px; */
+  border-radius: ${radius.default}px;
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus,
+  &.populated {
+    box-shadow: 0 0 0 2px ${colors.accent};
+    outline: 0;
+    transition: box-shadow 0.1s ease-in-out;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
 `;
 
 export const Textarea = styled(`textarea`)`
-  background-color: ${colors.lightest};
-  border: 1px solid ${colors.brandBright};
-  border-radius: ${radius.default}px;
-  color: ${colors.text};
   display: block;
-  font-size: 1.1rem;
-  padding: ${spacing.sm}px ${spacing.md}px;
+  font-family: ${defaultFontStack};
+  font-size: 0.875rem;
+  line-height: 1.42857143;
   width: 100%;
+  padding: ${spacing.sm}px ${spacing.md}px;
+  margin-bottom: 20px;
+  outline: none;
+  border: 1px solid #cccccc;
+  border-radius: ${radius.default}px;
 
-  :focus {
-    box-shadow: 0 0 0 3px ${colors.accent};
+  transition: all 0.2s ease-in-out;
+
+  &:focus,
+  &.populated {
+    box-shadow: 0 0 0 2px ${colors.accent};
     outline: 0;
-    transition: box-shadow 0.15s ease-in-out;
+    transition: box-shadow 0.1s ease-in-out;
+
+    &::placeholder {
+      color: transparent;
+    }
   }
 `;
 
@@ -87,30 +92,19 @@ export const Label = styled(`label`)`
 `;
 
 export const Submit = styled(`button`)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  color: ${colors.lightest};
-  font-size: 1.25rem;
-  width: 100%;
-  padding: 0.5em 0.75rem;
-  margin-top: ${spacing.md}px;
-  background: ${colors.brand};
+  text-transform: uppercase;
+  color: ${colors.extraLight};
+  background: #1792e8;
+  width: 35%;
+  padding: ${spacing.md}px ${spacing.md}px;
+  margin: 0 auto;
+  border: none;
   border-radius: ${radius.default}px;
-  transition: 0.5s;
+  transition: all 0.2s ease-in-out;
 
-  :focus {
-    box-shadow: 0 0 0 3px ${colors.accent};
-    outline: 0;
-    transition: box-shadow 0.15s ease-in-out;
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      background: ${colors.brandDark};
-      box-shadow: 0 0 0 1px ${colors.accent};
-    }
+  &:hover {
+    background: #0e82d4;
+    cursor: pointer;
   }
 `;
 export const HalfField = styled(`div`)`
@@ -123,4 +117,24 @@ export const HalfField = styled(`div`)`
 
 export const FullField = styled(`div`)`
   flex: 0 0 100%;
+`;
+
+export const Status = styled(`p`)`
+  width: 100%;
+  padding: ${spacing.sm}px ${spacing.md}px;
+  margin-bottom: ${spacing.xs}px;
+  border: 1px solid transparent;
+  border-radius: ${radius.default}px;
+
+  &.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  &.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
 `;

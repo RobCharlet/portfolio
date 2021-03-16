@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 
 const GithubRepo = ({ repo }) => {
   return (
-    <article>
+    <li>
       <a href={repo.url}>
         <Image
           css={css`
@@ -14,7 +14,7 @@ const GithubRepo = ({ repo }) => {
           alt={repo.title}
         />
       </a>
-    </article>
+    </li>
   );
 };
 

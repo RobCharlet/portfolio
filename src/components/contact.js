@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import styled from '@emotion/styled';
 import {
   Form,
   Fieldset,
@@ -10,8 +9,8 @@ import {
   Label,
   Textarea,
   Submit,
+  Status,
 } from './shared/FormElements';
-import { spacing } from '../utils/styles';
 
 const ContactForm = () => {
   const [serverState, setServerState] = useState({
@@ -24,14 +23,8 @@ const ContactForm = () => {
     mail: '',
     subject: '',
     text: '',
+    buttonText: 'Envoyer',
   });
-
-  const Errors = styled(`div`)`
-    display: ${(props) => (props.show ? 'flex' : 'none')};
-    flex-direction: row;
-    margin-bottom: ${spacing.xs}px;
-    width: 100%;
-  `;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +35,13 @@ const ContactForm = () => {
   };
 
   const resetForm = () => {
-    setData({ name: '', mail: '', subject: '', text: '' });
+    setData({
+      name: '',
+      mail: '',
+      subject: '',
+      text: '',
+      buttonText: 'Envoyer',
+    });
   };
 
   const handleServerResponse = (ok, msg) => {
@@ -50,6 +49,7 @@ const ContactForm = () => {
       submitting: false,
       status: { ok, msg },
     });
+
     if (ok) {
       setTimeout(() => {
         resetForm();
@@ -67,28 +67,31 @@ const ContactForm = () => {
 
     setServerState({ submitting: true });
 
-    console.log(serverState);
-
     axios
       .post('http://localhost:3000/contact', data)
       .then((r) => {
-        handleServerResponse(true, 'Thanks!', data);
+        handleServerResponse(
+          true,
+          'Merci ! Votre message a bien été envoyé.',
+          data,
+        );
       })
       .catch((r) => {
-        handleServerResponse(false, r.response.data.error, data);
+        handleServerResponse(
+          false,
+          'Il y a eu un problème avec le serveur.',
+          data,
+        );
       });
   };
 
   return (
     <Form onSubmit={handleOnSubmit}>
-      <Errors>
-        {serverState.status && (
-          <p className={!serverState.status.ok ? 'errorMsg' : ''}>
-            {serverState.status.msg}
-          </p>
-        )}
-      </Errors>
-
+      {serverState.status && (
+        <Status className={!serverState.status.ok ? 'error' : 'success'}>
+          {serverState.status.msg}
+        </Status>
+      )}
       <Fieldset>
         <HalfField>
           <Label htmlFor="name" required="required">
@@ -98,6 +101,7 @@ const ContactForm = () => {
             type="text"
             name="name"
             id="name"
+            placeholder="Votre nom"
             required="required"
             value={data.name}
             onChange={handleChange}
@@ -109,6 +113,7 @@ const ContactForm = () => {
             type="email"
             name="mail"
             id="mail"
+            placeholder="Votre courriel"
             required="required"
             value={data.mail}
             onChange={handleChange}
@@ -122,6 +127,7 @@ const ContactForm = () => {
             type="text"
             name="subject"
             id="subject"
+            placeholder="Le sujet de votre message"
             required="required"
             value={data.subject}
             onChange={handleChange}
@@ -133,6 +139,7 @@ const ContactForm = () => {
             name="text"
             id="text"
             rows="6"
+            placeholder="Votre message"
             required="required"
             value={data.text}
             onChange={handleChange}
@@ -140,14 +147,9 @@ const ContactForm = () => {
         </FullField>
 
         <Submit type="submit" disabled={serverState.submitting}>
-          Envoyer
+          {data.buttonText}
         </Submit>
       </Fieldset>
-      {serverState.status && (
-        <p className={!serverState.status.ok ? 'errorMsg' : ''}>
-          {serverState.status.msg}
-        </p>
-      )}
     </Form>
   );
 };

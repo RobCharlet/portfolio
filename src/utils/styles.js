@@ -7,6 +7,7 @@ export const colors = {
   background: '#FFF',
   accent: '#ffb238',
   error: '#ec1818',
+  extraLight: '#fff',
 };
 
 export const darkColors = {
@@ -16,6 +17,7 @@ export const darkColors = {
   background: '#232129',
   accent: '#ffb238',
   error: '#ec1818',
+  extraLight: '#333',
 };
 
 export const radialGrandient = [
