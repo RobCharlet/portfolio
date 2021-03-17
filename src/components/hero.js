@@ -26,7 +26,7 @@ const TextBox = styled('header')`
   flex-direction: column;
   height: 100%;
   justify-content: flex-end;
-  padding: 0 calc((100vw - 800px) / 2) 2rem;
+  padding: 0 calc((100vw - 800px) / 2) calc(var(--baseline) * 2rem);
 
   @media (max-width: ${breakpoints.phablet}px) {
     margin-left: 15px;
@@ -38,10 +38,9 @@ const TextBox = styled('header')`
     text-transform: uppercase;
     font-size: 5vmin;
     letter-spacing: 0.03em;
-    line-height: 1;
     color: ${colors.extraLight};
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
-    margin-bottom: 1.5rem;
+    margin-bottom: calc(var(--baseline) * 0.5rem);
   }
 
   p,

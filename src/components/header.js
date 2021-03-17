@@ -19,7 +19,7 @@ const Nav = styled(`nav`)`
   flex-flow: row wrap;
   justify-content: space-between;
   width: 780px;
-  padding: 1rem 0;
+  padding: calc(var(--baseline) * 0.5rem) 0;
   margin: 0 auto;
   max-width: 90vw;
 `;
@@ -27,6 +27,7 @@ const Nav = styled(`nav`)`
 const NavLink = styled(`a`)`
   display: block;
   color: ${colors.text};
+  font-size: 0.9rem;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 

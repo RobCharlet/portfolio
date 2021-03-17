@@ -25,11 +25,10 @@ export const Form = styled(`form`)`
 export const Input = styled(`input`)`
   display: block;
   width: 100%;
-  height: 34px;
-  font-size: 0.875rem;
-  line-height: 1.42857143;
+  height: calc(var(--baseline) * 1.5rem);
+  font-size: 0.8rem;
   padding: ${spacing.sm}px ${spacing.md}px;
-  margin-bottom: 20px;
+  margin-bottom: calc(var(--baseline) * 0.75rem);
   outline: none;
 
   border: 1px solid ${colors.darkerGrey};
@@ -52,11 +51,10 @@ export const Input = styled(`input`)`
 export const Textarea = styled(`textarea`)`
   display: block;
   font-family: ${defaultFontStack};
-  font-size: 0.875rem;
-  line-height: 1.42857143;
+  font-size: 0.8rem;
   width: 100%;
   padding: ${spacing.sm}px ${spacing.md}px;
-  margin-bottom: 20px;
+  margin-bottom: calc(var(--baseline) * 0.75rem);
   outline: none;
   border: 1px solid ${colors.darkerGrey};
   border-radius: ${radius.default}px;
@@ -86,7 +84,7 @@ export const Fieldset = styled(`fieldset`)`
 
 export const Label = styled(`label`)`
   display: flex;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: ${colors.textLight};
   padding: ${spacing.xs}px;
 `;

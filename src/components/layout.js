@@ -1,7 +1,7 @@
 import { css, Global } from '@emotion/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { colors, darkColors, fonts } from '../utils/styles';
+import { colors, darkColors, fonts, breakpoints } from '../utils/styles';
 import Header from '../components/header';
 import Hero from '../components/hero';
 import Footer from '../components/footer';
@@ -16,6 +16,15 @@ const Layout = ({ children }) => {
             margin: 0;
           }
 
+          :root {
+            --baseline: 1.4;
+            line-height: var(--baseline);
+
+            @media (min-width: ${breakpoints.tablet}px) {
+              --baseline: 1.6;
+            }
+          }
+
           html {
             scroll-behavior: smooth;
           }
@@ -25,8 +34,7 @@ const Layout = ({ children }) => {
             margin: 0;
             color: ${colors.text};
             font-family: ${fonts.body};
-            font-size: 18px;
-            line-height: 1.4;
+            font-size: 20px;
             background-color: ${colors.background}
               /** remove margin for the main div gatsby mounts into */ > div {
               margin-top: 0;
@@ -46,25 +54,28 @@ const Layout = ({ children }) => {
           h6 {
             color: ${colors.brand};
             font-family: ${fonts.heading};
-            line-height: 1.1;
 
             + * {
-              margin-top: 0.5rem;
+              margin-top: calc(var(--baseline) * 0.75rem);
             }
           }
 
           h2 {
-            margin-bottom: 1.25rem;
+            margin-bottom: calc(var(--baseline) * 0.75rem);
           }
 
           section + section {
             /* padding-top: 4rem; */
-            margin-top: 5rem;
+            margin-top: calc(var(--baseline) * 2rem);
             /* border-top: 1px solid ${colors.grey}; */
           }
 
           li {
-            margin-top: 0.25rem;
+            margin-top: calc(var(--baseline) * 0.75rem);
+          }
+
+          p {
+            font-size: 0.9rem;
           }
 
           .dark {
@@ -88,7 +99,7 @@ const Layout = ({ children }) => {
       <Header />
       <main
         css={css`
-          margin: 2rem auto 4rem;
+          margin: calc(var(--baseline) * 2rem) auto calc(var(--baseline) * 3rem);
           max-width: 90vw;
           width: 780px;
         `}

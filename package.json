@@ -12,7 +12,8 @@
     "start": "GATSBY_ENV=development gatsby develop",
     "build": "GATSBY_ENV=production gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "analyze": "ANALYZE_BUNDLE_SIZE=true gatsby build"
   },
   "dependencies": {
     "@emotion/react": "^11.1.5",
@@ -37,6 +38,7 @@
     "gatsby-plugin-react-helmet": "^3.10.0",
     "gatsby-plugin-robots-txt": "^1.5.5",
     "gatsby-plugin-sharp": "^2.14.1",
+    "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
     "gatsby-source-filesystem": "^2.11.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "nodemailer": "^6.5.0",

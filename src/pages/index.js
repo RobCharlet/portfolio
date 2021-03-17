@@ -20,7 +20,10 @@ const IndexPage = () => {
       padding: 5px 10px;
       margin: 7px;
       background: ${colors.grey};
-      flex: auto;
+      flex: 1 1 25%;
+      @media (min-width: ${breakpoints.tablet}px) {
+        flex: 1 1 15%;
+      }
     }
   `;
 
@@ -47,24 +50,29 @@ const IndexPage = () => {
       <section id="presentation">
         <h2>Présentation</h2>
         <p>
-          Développeur web depuis 2004, je suis spécialisé dans le Front-End, le
-          Responsive Design et le mobile. Je prends part à toutes les étapes de
-          création d’un site internet ou d'une application, de l'étude du projet
-          à sa mise en ligne, tout en recherchant la meilleure expérience
-          utilisateur possible. Et ce sur tous les supports numériques actuels,
-          du smartphone à l'écran ultra HD.
+          Développeur spécialisé dans les technologies web depuis 2004, je
+          prends part à toutes les étapes de création d’un site ou d'une
+          application.
+          <br />
+          <br />
+          De l'étude du projet à sa mise en ligne, je recherche la technologie
+          la mieux adaptée à ses spécificités, et ainsi offrir la meilleure
+          performance et expérience utilisateur possible, quel que soit le
+          support.
         </p>
       </section>
       <section id="skills">
         <h2>Compétences</h2>
         <Skills>
+          <li>PHP</li>
+          <li>Javascript</li>
+          <li>CSS</li>
+          <li>REST</li>
           <li>Symfony 3-5</li>
           <li>Drupal 7-9</li>
           <li>ReactJS</li>
-          <li>Gatsby</li>
           <li>VueJS</li>
-          <li>Javascript</li>
-          <li>PHP</li>
+          <li>GatsbyJS</li>
         </Skills>
       </section>
       <section id="github">

@@ -49,8 +49,6 @@ const ContactForm = () => {
   };
 
   const handleServerResponse = (ok, msg) => {
-    console.log(ok, msg);
-
     setServerState({
       submitting: true,
       status: { ok, msg },
@@ -101,7 +99,7 @@ const ContactForm = () => {
       <Fieldset>
         <HalfField>
           <Label htmlFor="name" required="required">
-            Nom
+            Nom :
           </Label>
           <Input
             type="text"
@@ -114,7 +112,7 @@ const ContactForm = () => {
           />
         </HalfField>
         <HalfField>
-          <Label htmlFor="mail">Courriel</Label>
+          <Label htmlFor="mail">Courriel :</Label>
           <Input
             type="email"
             name="mail"
@@ -127,7 +125,7 @@ const ContactForm = () => {
         </HalfField>
         <FullField>
           <Label htmlFor="subject" required="required">
-            Sujet
+            Sujet :
           </Label>
           <Input
             type="text"
@@ -140,7 +138,7 @@ const ContactForm = () => {
           />
         </FullField>
         <FullField>
-          <Label htmlFor="text">Votre message</Label>
+          <Label htmlFor="text">Votre message :</Label>
           <Textarea
             name="text"
             id="text"
