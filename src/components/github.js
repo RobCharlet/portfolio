@@ -5,12 +5,15 @@ import { css } from '@emotion/react';
 const GithubRepo = ({ repo }) => {
   return (
     <li>
-      <a href={repo.url}>
+      <a
+        href={repo.url}
+        css={css`
+          width: 444px;
+        `}
+      >
         <Image
-          css={css`
-            max-width: 100%;
-          `}
           fluid={repo.image.childImageSharp.fluid}
+          style={{ width: '100%', padding: '5px' }}
           alt={repo.title}
         />
       </a>

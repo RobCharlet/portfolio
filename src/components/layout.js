@@ -3,7 +3,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { colors, darkColors, fonts } from '../utils/styles';
 import Header from '../components/header';
-import Footer from './footer';
+import Hero from '../components/hero';
+import Footer from '../components/footer';
 
 const Layout = ({ children }) => {
   return (
@@ -70,6 +71,7 @@ const Layout = ({ children }) => {
         <title>Robin Charlet</title>
         <meta name="description" content="Développeur Full Stack" />
       </Helmet>
+      <Hero />
       <Header />
       <main
         css={css`

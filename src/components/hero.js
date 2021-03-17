@@ -7,6 +7,7 @@ import {
   radialGrandient,
   darkRadialGrandient,
   darkColors,
+  breakpoints,
 } from '../utils/styles';
 
 // Background Image
@@ -27,11 +28,15 @@ const TextBox = styled('header')`
   justify-content: flex-end;
   padding: 0 calc((100vw - 800px) / 2) 2rem;
 
+  @media (max-width: ${breakpoints.phablet}px) {
+    margin-left: 15px;
+  }
+
   h1 {
     font-style: normal;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 7vmin;
+    font-size: 5vmin;
     letter-spacing: 0.03em;
     line-height: 1;
     color: ${colors.extraLight};
