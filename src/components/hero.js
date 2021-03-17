@@ -41,12 +41,12 @@ const TextBox = styled('header')`
     line-height: 1;
     color: ${colors.extraLight};
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
-    margin-bottom: 40px;
+    margin-bottom: 1.5rem;
   }
 
   p,
   a {
-    color: ${colors.extraLight};
+    color: ${colors.darkerGrey};
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
     margin-top: 0;
   }

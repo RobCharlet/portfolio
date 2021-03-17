@@ -8,12 +8,17 @@ const GithubRepo = ({ repo }) => {
       <a
         href={repo.url}
         css={css`
-          width: 444px;
+          width: 447px;
         `}
       >
         <Image
+          css={css`
+            .dark & {
+              border-radius: 5px;
+            }
+          `}
           fluid={repo.image.childImageSharp.fluid}
-          style={{ width: '100%', padding: '5px' }}
+          style={{ width: '100%' }}
           alt={repo.title}
         />
       </a>

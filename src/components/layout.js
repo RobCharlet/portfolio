@@ -53,16 +53,29 @@ const Layout = ({ children }) => {
             }
           }
 
-          h2 strong {
-            color: #222;
+          h2 {
+            margin-bottom: 1.25rem;
           }
 
           section + section {
-            margin-top: 3rem;
+            /* padding-top: 4rem; */
+            margin-top: 5rem;
+            /* border-top: 1px solid ${colors.grey}; */
           }
 
           li {
             margin-top: 0.25rem;
+          }
+
+          .dark {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+              color: ${colors.bluePrimary};
+            }
           }
         `}
       />

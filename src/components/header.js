@@ -7,10 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled(`header`)`
-  background-color: #eee;
+  background-color: ${colors.grey};
 
   .dark & {
-    background-color: ${darkColors.background};
+    background-color: ${darkColors.darkerGrey};
   }
 `;
 
@@ -28,9 +28,17 @@ const NavLink = styled(`a`)`
   display: block;
   color: ${colors.text};
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: ${colors.darkerBluePrimary};
+  }
 
   .dark & {
     color: ${darkColors.text};
+    &:hover {
+      color: ${darkColors.brand};
+    }
   }
 `;
 

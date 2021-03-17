@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import ContactForm from '../components/contact';
 import GithubRepo from '../components/github';
 import UseGithub from '../hooks/use-github';
-import { breakpoints } from '../utils/styles';
+import { colors, breakpoints } from '../utils/styles';
 
 // markup
 const IndexPage = () => {
@@ -14,11 +14,12 @@ const IndexPage = () => {
     padding-left: 0;
 
     li {
+      text-align: center;
       list-style: none;
-      margin: 7px;
+      color: ${colors.text};
       padding: 5px 10px;
-      color: #374054;
-      background: #e4e4ea;
+      margin: 7px;
+      background: ${colors.grey};
       flex: auto;
     }
   `;
@@ -67,7 +68,7 @@ const IndexPage = () => {
         </Skills>
       </section>
       <section id="github">
-        <h2>Repo github</h2>
+        <h2>Travaux</h2>
         <RepoGithub>
           {githubs.map((repo) => (
             <GithubRepo key={repo.title} repo={repo} />

@@ -42,18 +42,24 @@ const ContactForm = () => {
       text: '',
       buttonText: 'Envoyer',
     });
+    setServerState({
+      submitting: false,
+      status: null,
+    });
   };
 
   const handleServerResponse = (ok, msg) => {
+    console.log(ok, msg);
+
     setServerState({
-      submitting: false,
+      submitting: true,
       status: { ok, msg },
     });
 
     if (ok) {
       setTimeout(() => {
         resetForm();
-      }, 6000);
+      }, 5000);
     }
   };
 
@@ -79,7 +85,7 @@ const ContactForm = () => {
       .catch((r) => {
         handleServerResponse(
           false,
-          'Il y a eu un problème avec le serveur.',
+          'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.',
           data,
         );
       });

@@ -1,21 +1,26 @@
 /** Colors */
 export const colors = {
   brand: '#da0013',
-  brandDark: '#ce0013',
-  bluePrimary: '#00DAC7',
-  text: '#232129',
-  background: '#FFF',
-  accent: '#ffb238',
-  error: '#ec1818',
+  bluePrimary: '#3A6EA5',
+  darkerBluePrimary: '#004E98',
+  grey: '#EBEBEB',
+  darkerGrey: '#C0C0C0',
+  text: '#292929',
+  background: '#fff',
+  accent: '#95B6DA',
+  error: '#FF5C69',
   extraLight: '#fff',
 };
 
 export const darkColors = {
   brand: '#da0013',
-  bluePrimary: '#da0013',
+  bluePrimary: '#3A6EA5',
+  darkerBluePrimary: '#004E98',
+  grey: '#EBEBEB',
+  darkerGrey: '#666',
   text: '#fff',
-  background: '#232129',
-  accent: '#ffb238',
+  background: '#3d3d3d',
+  accent: '#95B6DA',
   error: '#ec1818',
   extraLight: '#444',
 };

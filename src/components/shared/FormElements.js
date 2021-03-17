@@ -32,7 +32,7 @@ export const Input = styled(`input`)`
   margin-bottom: 20px;
   outline: none;
 
-  border: 1px solid #cccccc;
+  border: 1px solid ${colors.darkerGrey};
   border-radius: ${radius.default}px;
 
   transition: all 0.2s ease-in-out;
@@ -58,7 +58,7 @@ export const Textarea = styled(`textarea`)`
   padding: ${spacing.sm}px ${spacing.md}px;
   margin-bottom: 20px;
   outline: none;
-  border: 1px solid #cccccc;
+  border: 1px solid ${colors.darkerGrey};
   border-radius: ${radius.default}px;
 
   transition: all 0.2s ease-in-out;
@@ -94,7 +94,7 @@ export const Label = styled(`label`)`
 export const Submit = styled(`button`)`
   text-transform: uppercase;
   color: ${colors.extraLight};
-  background: #1792e8;
+  background-color: ${colors.darkerBluePrimary};
   width: 35%;
   padding: ${spacing.md}px ${spacing.md}px;
   margin: 0 auto;
@@ -103,8 +103,16 @@ export const Submit = styled(`button`)`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background: #0e82d4;
+    background: ${colors.bluePrimary};
     cursor: pointer;
+  }
+
+  .dark & {
+    background-color: ${colors.bluePrimary};
+
+    &:hover {
+      background: ${colors.darkerBluePrimary};
+    }
   }
 `;
 export const HalfField = styled(`div`)`
