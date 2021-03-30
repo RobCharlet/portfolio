@@ -100,6 +100,10 @@ export const Submit = styled(`button`)`
   border-radius: ${radius.default}px;
   transition: all 0.2s ease-in-out;
 
+  @media (max-width: ${breakpoints.phablet}px) {
+    width: 100%;
+  }
+
   &:hover {
     background: ${colors.bluePrimary};
     cursor: pointer;
