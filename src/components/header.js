@@ -31,7 +31,7 @@ const NavLink = styled(`a`)`
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 
-  @media (max-width: ${breakpoints.mobile}px) {
+  @media (max-width: ${breakpoints.phablet}px) {
     flex-basis: 50%;
     margin-bottom: calc(var(--baseline) * 0.5rem);
   }
