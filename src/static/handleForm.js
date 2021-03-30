@@ -10,14 +10,6 @@ app.use(cors());
 
 const contactAdress = process.env.MAIL_CONTACT;
 
-console.log(
-  process.env.MAIL_USER,
-  process.env.MAIL_HOST,
-  process.env.MAIL_PORT,
-  process.env.MAIL_USER,
-  process.env.MAIL_PASSWORD,
-);
-
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
   port: process.env.MAIL_PORT,
@@ -49,8 +41,6 @@ app.post('/contact', function (req, res) {
     subject: subject,
     text: content,
   };
-
-  console.log(mail);
 
   transporter.sendMail(mail, (err, data) => {
     if (err) {

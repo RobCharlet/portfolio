@@ -72,7 +72,7 @@ const ContactForm = () => {
     setServerState({ submitting: true });
 
     axios
-      .post('http://localhost:3000/contact', data)
+      .post('/contact', data)
       .then((r) => {
         handleServerResponse(
           true,
