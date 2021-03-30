@@ -20,6 +20,7 @@ const GithubRepo = ({ repo }) => {
           fluid={repo.image.childImageSharp.fluid}
           style={{ width: '100%' }}
           alt={repo.title}
+          loading="lazy"
         />
       </a>
     </li>

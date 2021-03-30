@@ -28,15 +28,21 @@ const TextBox = styled('header')`
   justify-content: flex-end;
   padding: 0 calc((100vw - 800px) / 2) calc(var(--baseline) * 2rem);
 
-  @media (max-width: ${breakpoints.mobile}px) {
+  @media (max-width: ${breakpoints.tablet}px) {
     > * {
-      padding-left: 15px;
+      padding-left: calc(var(--baseline) * 1rem);
     }
   }
 
-  @media (width: ${breakpoints.tablet}px) {
+  @media (max-width: ${breakpoints.phablet}px) {
     > * {
-      padding-left: calc(var(--baseline) * 1rem);
+      padding-left: calc(var(--baseline) * 0.5rem);
+    }
+  }
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    > * {
+      padding-left: 15px;
     }
   }
 
