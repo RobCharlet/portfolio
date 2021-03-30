@@ -56,7 +56,7 @@ const TextBox = styled('header')`
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
     margin-bottom: calc(var(--baseline) * 0.5rem);
 
-    @media (max-width: ${breakpoints.mobile}px) {
+    @media (max-width: ${breakpoints.phablet}px) {
       font-size: 8vmin;
     }
   }
