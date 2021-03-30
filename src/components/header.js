@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { css } from '@emotion/react';
-import { colors, darkColors } from '../utils/styles';
+import { colors, darkColors, breakpoints } from '../utils/styles';
 import { ThemeToggler } from 'gatsby-plugin-dark-mode';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
@@ -30,6 +30,11 @@ const NavLink = styled(`a`)`
   font-size: 0.9rem;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
+
+  @media (max-width: ${breakpoints.mobile}px) {
+    flex-basis: 50%;
+    margin-bottom: calc(var(--baseline) * 0.5rem);
+  }
 
   &:hover {
     color: ${colors.darkerBluePrimary};

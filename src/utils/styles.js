@@ -91,7 +91,7 @@ export const radius = {
 export const breakpoints = {
   mobile: 400,
   phablet: 550,
-  tablet: 750,
+  tablet: 768,
   desktop: 1000,
   hd: 1300,
 };

@@ -28,8 +28,16 @@ const TextBox = styled('header')`
   justify-content: flex-end;
   padding: 0 calc((100vw - 800px) / 2) calc(var(--baseline) * 2rem);
 
-  @media (max-width: ${breakpoints.phablet}px) {
-    margin-left: 15px;
+  @media (max-width: ${breakpoints.mobile}px) {
+    > * {
+      padding-left: 15px;
+    }
+  }
+
+  @media (width: ${breakpoints.tablet}px) {
+    > * {
+      padding-left: calc(var(--baseline) * 1rem);
+    }
   }
 
   h1 {
@@ -41,6 +49,10 @@ const TextBox = styled('header')`
     color: ${colors.extraLight};
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
     margin-bottom: calc(var(--baseline) * 0.5rem);
+
+    @media (max-width: ${breakpoints.mobile}px) {
+      font-size: 8vmin;
+    }
   }
 
   p,
