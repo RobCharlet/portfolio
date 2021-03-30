@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled(`menu`)`
+  padding-left: 0;
   background-color: ${colors.grey};
 
   .dark & {
