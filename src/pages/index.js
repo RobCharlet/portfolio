@@ -56,7 +56,7 @@ const IndexPage = () => {
           <br />
           <br />
           De l'étude du projet à sa mise en ligne, je recherche la technologie
-          la mieux adaptée à ses spécificités, et ainsi offrir la meilleure
+          la mieux adaptée à ses spécificités, pour offrir la meilleure
           performance et expérience utilisateur possible, quel que soit le
           support.
         </p>
