@@ -13,7 +13,7 @@ const contactAdress = process.env.MAIL_CONTACT;
 const transporter = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
   port: process.env.MAIL_PORT,
-  secure: false, // true for 465, false for other ports
+  secure: true, // true for 465, false for other ports
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASSWORD,
@@ -36,7 +36,7 @@ app.post('/contact', function (req, res) {
   var message = req.body.text || '[No message]';
   var content = `name: ${name} \n email: ${email} \n subject: ${subject} \n message: ${message} `;
   var mail = {
-    from: email,
+    from: contactAdress,
     to: contactAdress,
     subject: subject,
     text: content,
