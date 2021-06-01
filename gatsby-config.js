@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: 'Robin Charlet',
     description: 'Développeur Full Stack',
-    siteUrl: 'http://178.32.222.185',
+    siteUrl: 'https://www.robincharlet.fr/',
   },
   plugins: [
     'gatsby-plugin-emotion',
@@ -22,6 +22,7 @@ module.exports = {
     'gatsby-plugin-mdx',
     'gatsby-transformer-sharp',
     'gatsby-plugin-dark-mode',
+    `gatsby-plugin-sitemap`,
     {
       resolve: 'gatsby-source-filesystem',
       options: {

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../../.env.development' });
+require('dotenv').config({ path: '../../.env.production' });
 const express = require('express');
 const nodemailer = require('nodemailer');
 const Email = require('email-templates');
