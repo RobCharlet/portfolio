@@ -26,6 +26,7 @@
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "email-templates": "^8.0.7",
     "express": "^4.17.1",
     "gatsby": "^2.32.3",
     "gatsby-background-image": "^1.4.1",
@@ -42,6 +43,7 @@
     "gatsby-source-filesystem": "^2.11.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "nodemailer": "^6.5.0",
+    "pug": "^3.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0"

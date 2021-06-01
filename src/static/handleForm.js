@@ -1,6 +1,7 @@
-require('dotenv').config({ path: '../../.env.production' });
+require('dotenv').config({ path: '../../.env.development' });
 const express = require('express');
 const nodemailer = require('nodemailer');
+const Email = require('email-templates');
 const cors = require('cors');
 const app = express();
 
@@ -31,28 +32,40 @@ transporter.verify(function (error, success) {
 
 app.post('/contact', function (req, res) {
   var name = req.body.name;
-  var email = req.body.mail || '[No subject]';
+  var mail = req.body.mail || '[No subject]';
   var subject = req.body.subject || '[No subject]';
   var message = req.body.text || '[No message]';
-  var content = `name: ${name} \n email: ${email} \n subject: ${subject} \n message: ${message} `;
-  var mail = {
-    from: contactAdress,
-    to: contactAdress,
-    subject: subject,
-    text: content,
-  };
 
-  transporter.sendMail(mail, (err, data) => {
-    if (err) {
+  const email = new Email({
+    transport: transporter,
+    send: true,
+    preview: false,
+  });
+
+  email
+    .send({
+      template: 'robin',
+      message: {
+        from: contactAdress,
+        to: contactAdress,
+      },
+      locals: {
+        name: name,
+        mail: mail,
+        subject: subject,
+        message: message,
+      },
+    })
+    .then(
       res.json({
         status: 'fail',
-      });
-    } else {
+      }),
+    )
+    .catch(
       res.json({
         status: 'success',
-      });
-    }
-  });
+      }),
+    );
 });
 
 app.listen(3000);
