@@ -66,7 +66,7 @@ const ContactForm = () => {
 
     setData({
       ...data,
-      buttonText: 'Sending...',
+      buttonText: 'Envoi...',
     });
 
     setServerState({ submitting: true });
