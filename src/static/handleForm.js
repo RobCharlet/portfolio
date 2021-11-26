@@ -30,10 +30,6 @@ transporter.verify(function (error, success) {
   }
 });
 
-app.get('/contact', (req, res) => {
-  console.log(req);
-});
-
 app.post('/contact', function (req, res) {
   var name = req.body.name;
   var mail = req.body.mail || '[No subject]';
