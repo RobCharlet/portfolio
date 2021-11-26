@@ -56,8 +56,10 @@ app.post('/contact', function (req, res) {
         message: message,
       },
     })
-    .then(console.log('Email sent!'))
-    .catch(console.error('Something went wrong...'));
+    .then((res) => {
+      console.log('res.originalMessage', res.originalMessage);
+    })
+    .catch(console.error);
 });
 
 app.listen(3000);
