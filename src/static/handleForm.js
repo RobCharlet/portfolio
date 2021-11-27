@@ -56,12 +56,12 @@ app.post('/contact', function (req, res) {
         message: message,
       },
     })
-    .then(res.status(200).json({ status: 'ok' }))
-    .catch(
-      res
-        .status(500)
-        .json({ error: 'Something went wrong while sending the email' }),
-    );
+    .then(console.log)
+    .catch(console.error);
+
+  return res.status(200).json({
+    message: 'Email sent',
+  });
 });
 
 app.listen(3000);
