@@ -16,6 +16,7 @@ module.exports = {
         trackingId: 'UA-5767008-1',
       },
     },
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-offline',
@@ -47,7 +48,7 @@ module.exports = {
       __key: 'pages',
     },
     {
-      resolve: `gatsby-plugin-webpack-bundle-analyzer`,
+      resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
       options: {
         production: true,
         disable: !process.env.ANALYZE_BUNDLE_SIZE,
