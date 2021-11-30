@@ -1,5 +1,6 @@
 import React from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Image from 'gatsby-image';
+// import { GatsbyImage } from 'gatsby-plugin-image';
 import { css } from '@emotion/react';
 
 const GithubRepo = ({ repo }) => {
@@ -11,13 +12,13 @@ const GithubRepo = ({ repo }) => {
           width: 447px;
         `}
       >
-        <GatsbyImage
+        <Image
           css={css`
             .dark & {
               border-radius: 5px;
             }
           `}
-          image={repo.image.childImageSharp.gatsbyImageData}
+          fluid={repo.image.childImageSharp.fluid}
           style={{ width: '100%' }}
           alt={repo.title}
           loading="lazy"
