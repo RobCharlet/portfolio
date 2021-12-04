@@ -10,9 +10,7 @@ const UseGithub = () => {
             url
             image {
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(layout: FULL_WIDTH)
               }
             }
           }
