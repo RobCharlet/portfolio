@@ -53,6 +53,11 @@
   },
   "resolutions": {
     "semver-regex": "^3.1.4",
-    "ejs": "^3.1.10"
+    "ejs": "^3.1.10",
+    "immer": "^9.0.6",
+    "shell-quote": "^1.7.3",
+    "loader-utils": "^2.0.4",
+    "parse-url": "^8.1.0",
+    "socket.io": "^4.6.2"
   }
 }
