@@ -39,6 +39,6 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
-          rsync -avz --delete node_modules/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
+          rsync -avz --delete node_modules/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/node_modules
           rsync -avz emails/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/emails
           scp handleForm.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/handleForm.js
