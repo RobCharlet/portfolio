@@ -39,7 +39,6 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
-          rsync -avz static/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/static
           rsync -avz emails/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/emails
           scp .env.production $SERVER_USER@$SERVER_HOST:$SERVER_PATH/.env.production
           scp handleForm.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/handleForm.js
