@@ -19,7 +19,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps  # Utiliser l'option --legacy-peer-deps
 
       - name: Build Gatsby site
         run: npm run build
