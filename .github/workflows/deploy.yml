@@ -47,4 +47,4 @@ jobs:
           yarn install --force
           echo "Contents of directory after yarn install:"
           ls -la
-          pm2 restart handleForm || pm2 start handleForm.js --name handleForm"
+          pm2 restart handleForm || pm2 start handleForm.js --name handleForm
