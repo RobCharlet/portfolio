@@ -39,5 +39,14 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
+          rsync -avz static/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/static
           rsync -avz emails/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/emails
+          scp .env.production $SERVER_USER@$SERVER_HOST:$SERVER_PATH/.env.production
           scp handleForm.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/handleForm.js
+          ssh $SERVER_USER@$SERVER_HOST << 'EOF'
+            source ~/.nvm/nvm.sh
+            nvm use 22.8.0
+            cd $SERVER_PATH
+            yarn install
+            pm2 restart handleForm || pm2 start handleForm.js --name handleForm
+          EOF
