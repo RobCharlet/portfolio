@@ -39,12 +39,6 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
+          rsync -avz --delete node_modules/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
           rsync -avz emails/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/emails
           scp handleForm.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/handleForm.js
-          echo "Current directory: $(pwd)"
-          echo "Contents of directory before yarn install:"
-          ls -la
-          yarn install --force
-          echo "Contents of directory after yarn install:"
-          ls -la
-          pm2 restart handleForm || pm2 start handleForm.js --name handleForm
