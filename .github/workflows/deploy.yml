@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Utilisez Node.js 16 ou supérieur
+          node-version: '22'  # Utilisez Node.js 16 ou supérieur
 
       - name: Install Yarn
         run: npm install -g yarn
