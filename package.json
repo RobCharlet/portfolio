@@ -13,7 +13,8 @@
     "build": "GATSBY_ENV=production gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "analyze": "ANALYZE_BUNDLE_SIZE=true gatsby build"
+    "analyze": "ANALYZE_BUNDLE_SIZE=true gatsby build",
+    "handleform": "node handleForm.js"
   },
   "dependencies": {
     "@emotion/react": "^11.7.0",

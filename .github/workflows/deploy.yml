@@ -39,11 +39,4 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
-          rsync -avz static/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/server_static
-          scp .env.production $SERVER_USER@$SERVER_HOST:$SERVER_PATH/.env.production
-          ssh $SERVER_USER@$SERVER_HOST << 'EOF'
-            source ~/.nvm/nvm.sh
-            nvm use 22.8.0
-            cd $SERVER_PATH/server_static
-            yarn install
-          EOF
+          rsync -avz email/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/email
