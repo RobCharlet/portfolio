@@ -43,7 +43,7 @@ jobs:
           scp handleForm.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/handleForm.js
           scp package.json $SERVER_USER@$SERVER_HOST:$SERVER_PATH/package.json
           scp yarn.lock $SERVER_USER@$SERVER_HOST:$SERVER_PATH/yarn.lock
-          ssh $SERVER_USER@$SERVER_HOST << 'EOF'
+          ssh $SERVER_USER@$SERVER_HOST << "EOF"
             set -e  # Arrêter le script en cas d'erreur
             source ~/.nvm/nvm.sh
             nvm use 22.8.0
