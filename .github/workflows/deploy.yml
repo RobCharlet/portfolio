@@ -39,4 +39,4 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
-          rsync -avz email/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/email
+          rsync -avz emails/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/emails
