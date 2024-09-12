@@ -11,9 +11,19 @@ module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingId: 'UA-5767008-1',
+        trackingIds: [
+          'UA-5767008-1', // Google Analytics / GA
+        ],
+        gtagConfig: {
+          anonymize_ip: true,
+          cookie_expires: 0,
+        },
+        pluginConfig: {
+          head: true,
+          respectDNT: true,
+        },
       },
     },
     'gatsby-plugin-image',
