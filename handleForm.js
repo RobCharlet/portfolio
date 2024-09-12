@@ -1,11 +1,12 @@
 require('dotenv').config({ path: './.env.production' });
+const app = express();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
+const Email = require('email-templates');
 const express = require('express');
 const nodemailer = require('nodemailer');
-const Email = require('email-templates');
-const cors = require('cors');
-const csrf = require('csurf');
-const cookieParser = require('cookie-parser');
-const app = express();
+const validator = require('validator');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -40,10 +41,10 @@ app.get('/csrf-token', (req, res) => {
 });
 
 app.post('/contact', function (req, res) {
-  var name = req.body.name;
-  var mail = req.body.mail || '[No subject]';
-  var subject = req.body.subject || '[No subject]';
-  var message = req.body.text || '[No message]';
+  var name = validator.escape(req.body.name);
+  var mail = validator.isEmail(req.body.mail) || '[No subject]';
+  var subject = validator.escape(req.body.subject) || '[No subject]';
+  var message = validator.escape(req.body.text) || '[No message]';
 
   const email = new Email({
     transport: transporter,
