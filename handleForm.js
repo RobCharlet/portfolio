@@ -1,5 +1,4 @@
 require('dotenv').config({ path: './.env.production' });
-const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
@@ -8,6 +7,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const validator = require('validator');
 
+const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
