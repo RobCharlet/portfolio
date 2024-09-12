@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import {
-  Form,
   Fieldset,
   HalfField,
   FullField,
@@ -18,37 +19,7 @@ const ContactForm = () => {
     status: null,
   });
 
-  const [data, setData] = useState({
-    name: '',
-    mail: '',
-    subject: '',
-    text: '',
-    buttonText: 'Envoyer',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
-  const resetForm = () => {
-    setData({
-      name: '',
-      mail: '',
-      subject: '',
-      text: '',
-      buttonText: 'Envoyer',
-    });
-    setServerState({
-      submitting: false,
-      status: null,
-    });
-  };
-
-  const handleServerResponse = (ok, msg) => {
+  const handleServerResponse = (ok, msg, resetForm) => {
     setServerState({
       submitting: true,
       status: { ok, msg },
@@ -61,100 +32,117 @@ const ContactForm = () => {
     }
   };
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-
-    setData({
-      ...data,
-      buttonText: 'Envoi...',
-    });
-
+  const handleOnSubmit = (values, actions) => {
     setServerState({ submitting: true });
 
     axios
-      .post('/contact', data)
+      .post('/contact', values)
       .then((r) => {
         handleServerResponse(
           true,
           'Merci ! Votre message a bien été envoyé.',
-          data,
+          actions.resetForm
         );
       })
       .catch((r) => {
         handleServerResponse(
           false,
           'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.',
-          data,
+          actions.resetForm
         );
+      })
+      .finally(() => {
+        setServerState({ submitting: false });
+        actions.setSubmitting(false);
       });
   };
 
-  return (
-    <Form onSubmit={handleOnSubmit}>
-      {serverState.status && (
-        <Status className={!serverState.status.ok ? 'error' : 'success'}>
-          {serverState.status.msg}
-        </Status>
-      )}
-      <Fieldset>
-        <HalfField>
-          <Label htmlFor="name" required="required">
-            Nom :
-          </Label>
-          <Input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Votre nom"
-            required="required"
-            value={data.name}
-            onChange={handleChange}
-          />
-        </HalfField>
-        <HalfField>
-          <Label htmlFor="mail">Courriel :</Label>
-          <Input
-            type="email"
-            name="mail"
-            id="mail"
-            placeholder="Votre courriel"
-            required="required"
-            value={data.mail}
-            onChange={handleChange}
-          />
-        </HalfField>
-        <FullField>
-          <Label htmlFor="subject" required="required">
-            Sujet :
-          </Label>
-          <Input
-            type="text"
-            name="subject"
-            id="subject"
-            placeholder="Le sujet de votre message"
-            required="required"
-            value={data.subject}
-            onChange={handleChange}
-          />
-        </FullField>
-        <FullField>
-          <Label htmlFor="text">Votre message :</Label>
-          <Textarea
-            name="text"
-            id="text"
-            rows="6"
-            placeholder="Votre message"
-            required="required"
-            value={data.text}
-            onChange={handleChange}
-          ></Textarea>
-        </FullField>
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Nom est requis'),
+    mail: Yup.string().email('Email invalide').required('Email est requis'),
+    subject: Yup.string().required('Sujet est requis'),
+    text: Yup.string().required('Message est requis'),
+  });
 
-        <Submit type="submit" disabled={serverState.submitting}>
-          {data.buttonText}
-        </Submit>
-      </Fieldset>
-    </Form>
+  return (
+    <Formik
+      initialValues={{
+        name: '',
+        mail: '',
+        subject: '',
+        text: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleOnSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          {serverState.status && (
+            <Status className={!serverState.status.ok ? 'error' : 'success'}>
+              {serverState.status.msg}
+            </Status>
+          )}
+          <Fieldset>
+            <HalfField>
+              <Label htmlFor="name" required="required">
+                Nom :
+              </Label>
+              <Field
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Votre nom"
+                required="required"
+                as={Input}
+              />
+              <ErrorMessage name="name" component="div" className="error" />
+            </HalfField>
+            <HalfField>
+              <Label htmlFor="mail">Courriel :</Label>
+              <Field
+                type="email"
+                name="mail"
+                id="mail"
+                placeholder="Votre courriel"
+                required="required"
+                as={Input}
+              />
+              <ErrorMessage name="mail" component="div" className="error" />
+            </HalfField>
+            <FullField>
+              <Label htmlFor="subject" required="required">
+                Sujet :
+              </Label>
+              <Field
+                type="text"
+                name="subject"
+                id="subject"
+                placeholder="Le sujet de votre message"
+                required="required"
+                as={Input}
+              />
+              <ErrorMessage name="subject" component="div" className="error" />
+            </FullField>
+            <FullField>
+              <Label htmlFor="text">Votre message :</Label>
+              <Field
+                name="text"
+                id="text"
+                rows="6"
+                placeholder="Votre message"
+                required="required"
+                as={Textarea}
+              />
+              <ErrorMessage name="text" component="div" className="error" />
+            </FullField>
+
+            <Submit type="submit" disabled={isSubmitting || serverState.submitting}>
+              {isSubmitting || serverState.submitting ? 'Envoi...' : 'Envoyer'}
+            </Submit>
+          </Fieldset>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
