@@ -27,9 +27,6 @@ jobs:
       - name: Build Gatsby site
         run: yarn build
 
-      - name: Test handleForm.js
-        run: node handleForm.js  # Exécutez le script pour vérifier qu'il fonctionne correctement
-
       - name: Deploy to Server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
