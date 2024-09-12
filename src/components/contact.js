@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -20,6 +20,13 @@ const ContactForm = () => {
     status: null,
   });
 
+  const [csrfToken, setCsrfToken] = useState(null);
+  useEffect(() => {
+    axios.get('/csrf-token').then((response) => {
+      setCsrfToken(response.data.csrfToken);
+    });
+  }, []);
+
   const handleServerResponse = (ok, msg, resetForm) => {
     setServerState({
       submitting: true,
@@ -36,8 +43,13 @@ const ContactForm = () => {
   const handleOnSubmit = (values, actions) => {
     setServerState({ submitting: true });
 
+    const dataWithCsrf = {
+      ...values,
+      _csrf: csrfToken,
+    };
+
     axios
-      .post('/contact', values)
+      .post('/contact', dataWithCsrf)
       .then((r) => {
         handleServerResponse(
           true,

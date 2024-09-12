@@ -3,11 +3,16 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const Email = require('email-templates');
 const cors = require('cors');
+const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+// validate automatically csrf token
+app.use(csrf({ cookie: true }));
 
 const contactAdress = process.env.MAIL_CONTACT;
 
@@ -27,6 +32,11 @@ transporter.verify(function (error, success) {
   } else {
     console.log('Server is ready to take our messages');
   }
+});
+
+// generate csrf token
+app.get('/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
 });
 
 app.post('/contact', function (req, res) {
