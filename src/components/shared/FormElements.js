@@ -11,12 +11,6 @@ export const Form = styled(`form`)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* padding: ${spacing['2xl']}px ${spacing.md}px 0; */
-
-  /* @media (min-width: ${breakpoints.tablet}px) {
-    padding: ${spacing['2xl']}px ${spacing.xl}px 0;
-  } */
-
   @media (min-width: ${breakpoints.desktop}px) {
     justify-content: flex-start;
   }
@@ -30,18 +24,14 @@ export const Input = styled(`input`)`
   padding: ${spacing.sm}px ${spacing.md}px;
   margin-bottom: calc(var(--baseline) * 0.75rem);
   outline: none;
-
   border: 1px solid ${colors.darkerGrey};
   border-radius: ${radius.default}px;
-
   transition: all 0.2s ease-in-out;
-
   &:focus,
   &.populated {
     box-shadow: 0 0 0 2px ${colors.accent};
     outline: 0;
     transition: box-shadow 0.1s ease-in-out;
-
     &::placeholder {
       color: transparent;
     }
@@ -58,15 +48,12 @@ export const Textarea = styled(`textarea`)`
   outline: none;
   border: 1px solid ${colors.darkerGrey};
   border-radius: ${radius.default}px;
-
   transition: all 0.2s ease-in-out;
-
   &:focus,
   &.populated {
     box-shadow: 0 0 0 2px ${colors.accent};
     outline: 0;
     transition: box-shadow 0.1s ease-in-out;
-
     &::placeholder {
       color: transparent;
     }
@@ -99,27 +86,23 @@ export const Submit = styled(`button`)`
   border: none;
   border-radius: ${radius.default}px;
   transition: all 0.2s ease-in-out;
-
   @media (max-width: ${breakpoints.phablet}px) {
     width: 100%;
   }
-
   &:hover {
     background: ${colors.bluePrimary};
     cursor: pointer;
   }
-
   .dark & {
     background-color: ${colors.bluePrimary};
-
     &:hover {
       background: ${colors.darkerBluePrimary};
     }
   }
 `;
+
 export const HalfField = styled(`div`)`
   flex: 0 0 100%;
-
   @media (min-width: ${breakpoints.tablet}px) {
     flex: 0 0 48%;
   }
@@ -135,16 +118,19 @@ export const Status = styled(`p`)`
   margin-bottom: ${spacing.xs}px;
   border: 1px solid transparent;
   border-radius: ${radius.default}px;
-
   &.success {
     color: #155724;
     background-color: #d4edda;
     border-color: #c3e6cb;
   }
-
   &.error {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
   }
+`;
+
+export const ErrorMessageStyled = styled(`div`)`
+  color: #da0013;
+  font-size: 0.8rem;
 `;

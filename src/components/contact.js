@@ -11,6 +11,7 @@ import {
   Textarea,
   Submit,
   Status,
+  ErrorMessageStyled
 } from './shared/FormElements';
 
 const ContactForm = () => {
@@ -28,7 +29,7 @@ const ContactForm = () => {
     if (ok) {
       setTimeout(() => {
         resetForm();
-      }, 5000);
+      }, 2000);
     }
   };
 
@@ -59,9 +60,9 @@ const ContactForm = () => {
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Nom est requis'),
-    mail: Yup.string().email('Email invalide').required('Email est requis'),
-    subject: Yup.string().required('Sujet est requis'),
-    text: Yup.string().required('Message est requis'),
+    mail: Yup.string().email('Email invalide').required('Une adresse email est requise'),
+    subject: Yup.string().required('Un sujet est requis'),
+    text: Yup.string().required('Un message est requis'),
   });
 
   return (
@@ -95,7 +96,7 @@ const ContactForm = () => {
                 required="required"
                 as={Input}
               />
-              <ErrorMessage name="name" component="div" className="error" />
+              <ErrorMessage name="name" component={ErrorMessageStyled} />
             </HalfField>
             <HalfField>
               <Label htmlFor="mail">Courriel :</Label>
@@ -107,7 +108,7 @@ const ContactForm = () => {
                 required="required"
                 as={Input}
               />
-              <ErrorMessage name="mail" component="div" className="error" />
+              <ErrorMessage name="mail" component={ErrorMessageStyled} />
             </HalfField>
             <FullField>
               <Label htmlFor="subject" required="required">
@@ -121,7 +122,7 @@ const ContactForm = () => {
                 required="required"
                 as={Input}
               />
-              <ErrorMessage name="subject" component="div" className="error" />
+              <ErrorMessage name="subject" component={ErrorMessageStyled} />
             </FullField>
             <FullField>
               <Label htmlFor="text">Votre message :</Label>
@@ -133,7 +134,7 @@ const ContactForm = () => {
                 required="required"
                 as={Textarea}
               />
-              <ErrorMessage name="text" component="div" className="error" />
+              <ErrorMessage name="text" component={ErrorMessageStyled} />
             </FullField>
 
             <Submit type="submit" disabled={isSubmitting || serverState.submitting}>
