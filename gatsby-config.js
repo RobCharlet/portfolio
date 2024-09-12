@@ -1,4 +1,14 @@
 module.exports = {
+  proxy: [
+    {
+      prefix: '/contact',
+      url: 'http://localhost:3000',
+    },
+    {
+      prefix: '/csrf-token',
+      url: 'http://localhost:3000',
+    }
+  ],
   siteMetadata: {
     title: 'Robin Charlet',
     description: 'Développeur Full Stack',
