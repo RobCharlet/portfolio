@@ -22,7 +22,7 @@ const ContactForm = () => {
 
   const [csrfToken, setCsrfToken] = useState(null);
   useEffect(() => {
-    axios.get('/csrf-token').then((response) => {
+    axios.get('/contact/csrf-token').then((response) => {
       setCsrfToken(response.data.csrfToken);
     });
   }, []);
