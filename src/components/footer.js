@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <FooterSection>
       <p className="copyright">
-        <small>© Copyright Robin Charlet 2021. Tous droits réservés.</small>
+        <small>© Copyright Robin Charlet 2024. Tous droits réservés.</small>
       </p>
     </FooterSection>
   );

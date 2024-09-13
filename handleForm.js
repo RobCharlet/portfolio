@@ -42,7 +42,7 @@ app.get('/csrf-token', (req, res) => {
 
 app.post('/contact', function (req, res) {
   var name = validator.escape(req.body.name);
-  var mail = validator.isEmail(req.body.mail) || '[No subject]';
+  var mail = validator.isEmail(req.body.mail) ? req.body.mail : '[Invalid email]';
   var subject = validator.escape(req.body.subject) || '[No subject]';
   var message = validator.escape(req.body.text) || '[No message]';
 
@@ -58,6 +58,7 @@ app.post('/contact', function (req, res) {
       message: {
         from: contactAdress,
         to: contactAdress,
+        subject: `Nouveau message de ${name} - ${subject}`,
       },
       locals: {
         name: name,

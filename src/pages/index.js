@@ -66,13 +66,11 @@ const IndexPage = () => {
         <Skills>
           <li>PHP</li>
           <li>Javascript</li>
-          <li>CSS</li>
-          <li>REST</li>
           <li>Symfony 3-5</li>
-          <li>Drupal 7-9</li>
-          <li>ReactJS</li>
-          <li>VueJS</li>
-          <li>GatsbyJS</li>
+          <li>Drupal 7-10</li>
+          <li>Nest.js</li>
+          <li>Next.js</li>
+          <li>Hubspot</li>
         </Skills>
       </section>
       <section id="github">
