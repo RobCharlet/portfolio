@@ -13,6 +13,7 @@ import {
   Status,
   ErrorMessageStyled
 } from './shared/FormElements';
+import Loader from './shared/Loader';
 
 const ContactForm = () => {
   const [serverState, setServerState] = useState({
@@ -29,10 +30,12 @@ const ContactForm = () => {
   }, []);
 
   const handleServerResponse = (ok, msg) => {
-    setServerState({
-      submitting: false,
-      status: { ok, msg },
-    });
+    setTimeout(() => {
+      setServerState({
+        submitting: false,
+        status: { ok, msg },
+      });
+    }, 2000); // Délai de 2 secondes
   };
 
   const handleOnSubmit = (values, actions) => {
@@ -131,7 +134,7 @@ const ContactForm = () => {
             </FullField>
 
             <Submit type="submit" disabled={isSubmitting || serverState.submitting}>
-              {isSubmitting || serverState.submitting ? 'Envoi...' : 'Envoyer'}
+              {isSubmitting || serverState.submitting ? <Loader /> : 'Envoyer'}
             </Submit>
           </Fieldset>
         </Form>
