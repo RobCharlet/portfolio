@@ -38,13 +38,13 @@ const NavLink = styled(`a`)`
   }
 
   &:hover {
-    color: ${colors.darkerBluePrimary};
+    color: ${colors.bluePrimary};
   }
 
   .dark & {
     color: ${darkColors.text};
     &:hover {
-      color: ${darkColors.brand};
+      color: ${darkColors.bluePrimary};
     }
   }
 `;
@@ -52,7 +52,7 @@ const NavLink = styled(`a`)`
 const Header = () => (
   <HeaderContainer>
     <Nav>
-      <NavLink href="#presention">Présentation</NavLink>
+      <NavLink href="#presentation">Présentation</NavLink>
       <NavLink href="#skills">Compétences</NavLink>
       <NavLink href="#github">Travaux</NavLink>
       <NavLink href="#contact">Contact</NavLink>

@@ -35,6 +35,7 @@ const Layout = ({ children }) => {
             color: ${colors.text};
             font-family: ${fonts.body};
             font-size: 20px;
+            line-height: 1.6;
             background-color: ${colors.background}
               /** remove margin for the main div gatsby mounts into */ > div {
               margin-top: 0;

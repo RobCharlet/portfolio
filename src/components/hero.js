@@ -8,6 +8,7 @@ import {
   darkRadialGrandient,
   darkColors,
   breakpoints,
+  fonts, // Ajoutez cette ligne pour importer les polices
 } from '../utils/styles';
 
 // Background Image
@@ -47,6 +48,7 @@ const TextBox = styled('header')`
   }
 
   h1 {
+    font-family: ${fonts.heading};
     font-style: normal;
     font-weight: bold;
     text-transform: uppercase;

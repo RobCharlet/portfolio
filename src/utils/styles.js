@@ -1,28 +1,30 @@
 /** Colors */
 export const colors = {
-  brand: '#da0013',
-  bluePrimary: '#3A6EA5',
-  darkerBluePrimary: '#004E98',
+  brand: '#FF6F61',
+  bluePrimary: '#4A90E2',
+  darkerBluePrimary: '#003366',
   grey: '#EBEBEB',
   darkerGrey: '#C0C0C0',
-  text: '#292929',
-  background: '#fff',
-  accent: '#95B6DA',
+  text: '#333333',
+  background: '#F5F5F5',
+  accent: '#FFD700',
   error: '#FF5C69',
-  extraLight: '#fff',
+  extraLight: '#FFFFFF',
+  sendButton: '#007BFF',
 };
 
 export const darkColors = {
-  brand: '#da0013',
-  bluePrimary: '#3A6EA5',
-  darkerBluePrimary: '#004E98',
+  brand: '#FF6F61',
+  bluePrimary: '#4A90E2',
+  darkerBluePrimary: '#003366',
   grey: '#EBEBEB',
   darkerGrey: '#666',
-  text: '#fff',
-  background: '#3d3d3d',
-  accent: '#95B6DA',
-  error: '#ec1818',
-  extraLight: '#444',
+  text: '#FFFFFF',
+  background: '#333333',
+  accent: '#FFD700',
+  error: '#FF5C69',
+  extraLight: '#444444',
+  sendButton: '#007BFF',
 };
 
 export const radialGrandient = [
@@ -34,8 +36,8 @@ export const radialGrandient = [
 
 export const darkRadialGrandient = [
   'ellipse at center',
-  'rgba(255, 255, 255, 255) 0%',
-  'rgba(255, 255, 255, 255) 37%',
+  'rgba(255, 255, 255, 0) 0%',
+  'rgba(255, 255, 255, 0) 37%',
   'rgba(255, 255, 255, 0.2) 100%',
 ].join();
 
@@ -53,6 +55,12 @@ export const defaultFontStack = [
   'sans-serif',
 ].join();
 
+const headingFontStack = [
+  'Futura PT',
+  'Arial',
+  'sans-serif',
+].join();
+
 const monospaceFontStack = [
   `Space Mono`,
   `SFMono-Regular`,
@@ -66,7 +74,7 @@ const monospaceFontStack = [
 
 export const fonts = {
   body: defaultFontStack,
-  heading: `Futura PT, ${defaultFontStack}`,
+  heading: headingFontStack,
   monospace: monospaceFontStack,
 };
 

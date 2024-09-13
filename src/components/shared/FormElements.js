@@ -26,12 +26,12 @@ export const Input = styled(`input`)`
   outline: none;
   border: 1px solid ${colors.darkerGrey};
   border-radius: ${radius.default}px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &:focus,
   &.populated {
     box-shadow: 0 0 0 2px ${colors.accent};
     outline: 0;
-    transition: box-shadow 0.1s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
     &::placeholder {
       color: transparent;
     }
@@ -79,7 +79,7 @@ export const Label = styled(`label`)`
 export const Submit = styled(`button`)`
   text-transform: uppercase;
   color: ${colors.extraLight};
-  background-color: ${colors.darkerBluePrimary};
+  background-color: ${colors.sendButton};
   width: 35%;
   padding: ${spacing.md}px ${spacing.md}px;
   margin: 0 auto;
