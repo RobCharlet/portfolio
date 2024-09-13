@@ -20,53 +20,34 @@ const ContactForm = () => {
     status: null,
   });
 
-  const [csrfToken, setCsrfToken] = useState(null);
+  const [csrfToken, setCsrfToken] = useState('');
+
   useEffect(() => {
     axios.get('/csrf-token').then((response) => {
       setCsrfToken(response.data.csrfToken);
     });
   }, []);
 
-  const handleServerResponse = (ok, msg, resetForm) => {
+  const handleServerResponse = (ok, msg) => {
     setServerState({
-      submitting: true,
+      submitting: false,
       status: { ok, msg },
     });
-
-    if (ok) {
-      setTimeout(() => {
-        resetForm();
-      }, 2000);
-    }
   };
 
   const handleOnSubmit = (values, actions) => {
-    setServerState({ submitting: true });
-
-    const dataWithCsrf = {
-      ...values,
-      _csrf: csrfToken,
-    };
+    setServerState({ submitting: true, status: null });
 
     axios
-      .post('/contact', dataWithCsrf)
-      .then((r) => {
-        handleServerResponse(
-          true,
-          'Merci ! Votre message a bien été envoyé.',
-          actions.resetForm
-        );
-      })
-      .catch((r) => {
-        handleServerResponse(
-          false,
-          'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.',
-          actions.resetForm
-        );
-      })
-      .finally(() => {
-        setServerState({ submitting: false });
+      .post('/contact', { ...values, _csrf: csrfToken })
+      .then((response) => {
         actions.setSubmitting(false);
+        actions.resetForm();
+        handleServerResponse(true, 'Merci ! Votre message a bien été envoyé.');
+      })
+      .catch((error) => {
+        actions.setSubmitting(false);
+        handleServerResponse(false, 'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.');
       });
   };
 
