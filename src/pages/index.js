@@ -4,7 +4,9 @@ import Layout from '../components/layout';
 import ContactForm from '../components/contact';
 import GithubRepo from '../components/github';
 import UseGithub from '../hooks/use-github';
-import { colors, breakpoints } from '../utils/styles';
+import { colors, breakpoints, spacing, radius } from '../utils/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhp, faJs, faSymfony, faDrupal, faNodeJs, faReact } from '@fortawesome/free-brands-svg-icons';
 
 // markup
 const IndexPage = () => {
@@ -12,17 +14,42 @@ const IndexPage = () => {
     display: flex;
     flex-flow: row wrap;
     padding-left: 0;
+    justify-content: center;
 
     li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       list-style: none;
       color: ${colors.text};
-      padding: 5px 10px;
-      margin: 7px;
+      padding: ${spacing.md}px;
+      margin: ${spacing.sm}px;
       background: ${colors.grey};
-      flex: 1 1 25%;
+      border-radius: ${radius.large}px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex: 1 1 30%;
+      max-width: 200px;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      }
+
       @media (min-width: ${breakpoints.tablet}px) {
+        flex: 1 1 20%;
+      }
+
+      @media (min-width: ${breakpoints.desktop}px) {
         flex: 1 1 15%;
+      }
+
+      svg {
+        font-size: 2rem;
+        margin-bottom: ${spacing.sm}px;
+        color: ${colors.bluePrimary};
       }
     }
   `;
@@ -64,13 +91,30 @@ const IndexPage = () => {
       <section id="skills">
         <h2>Compétences</h2>
         <Skills>
-          <li>PHP</li>
-          <li>Javascript</li>
-          <li>Symfony 3-5</li>
-          <li>Drupal 7-10</li>
-          <li>Nest.js</li>
-          <li>Next.js</li>
-          <li>Hubspot</li>
+          <li>
+            <FontAwesomeIcon icon={faPhp} />
+            PHP
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faJs} />
+            Javascript
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faSymfony} />
+            Symfony 3-5
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faDrupal} />
+            Drupal<br /> 7-10
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faNodeJs} />
+            Nest.js
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faReact} />
+            Next.js
+          </li>
         </Skills>
       </section>
       <section id="github">

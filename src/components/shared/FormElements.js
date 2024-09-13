@@ -131,7 +131,7 @@ export const Status = styled(`p`)`
 `;
 
 export const ErrorMessageStyled = styled(`div`)`
-  color: #da0013;
+  color: ${colors.brand};
   font-size: 0.8rem;
   margin-top: -1rem;
   margin-bottom: 1rem;
