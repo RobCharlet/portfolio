@@ -55,12 +55,12 @@ const ContactForm = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required('Nom est requis'),
+    name: Yup.string().required('Votre nom est requis'),
     mail: Yup.string().email('Email invalide').required('Une adresse email est requise'),
     subject: Yup.string().required('Un sujet est requis'),
     text: Yup.string()
       .required('Un message est requis')
-      .min(50, 'Le message doit contenir au moins 50 caractères'), // Validation du nombre minimal de caractères
+      .min(50, 'Le message doit contenir au moins 50 caractères'),
   });
 
   return (
