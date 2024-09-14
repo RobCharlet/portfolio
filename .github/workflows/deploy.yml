@@ -16,10 +16,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22.8.0'  # Utilisez Node.js 22.8.0
+          node-version: '22.8.0'
 
       - name: Install Yarn
-        run: npm install -g yarn@1.22.22  # Spécifiez la version 1.22.22 de Yarn
+        run: npm install -g yarn@1.22.22
 
       - name: Install dependencies
         run: yarn install
