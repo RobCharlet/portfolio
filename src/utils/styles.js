@@ -1,6 +1,6 @@
 /** Colors */
 export const colors = {
-  brand: '#FF6F61',
+  brand: '#E65A50',
   bluePrimary: '#4A90E2',
   darkerBluePrimary: '#003366',
   grey: '#EBEBEB',
@@ -10,7 +10,7 @@ export const colors = {
   accent: '#FFD700',
   error: '#FF5C69',
   extraLight: '#FFFFFF',
-  sendButton: '#007BFF',
+  sendButton: '#0056b3',
 };
 
 export const darkColors = {
@@ -24,7 +24,7 @@ export const darkColors = {
   accent: '#FFD700',
   error: '#FF5C69',
   extraLight: '#444444',
-  sendButton: '#007BFF',
+  sendButton: '#4A90E2',
 };
 
 export const radialGrandient = [

@@ -63,14 +63,5 @@ module.exports = {
       },
       __key: 'pages',
     },
-    {
-      resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
-      options: {
-        production: true,
-        disable: !process.env.ANALYZE_BUNDLE_SIZE,
-        generateStatsFile: true,
-        analyzerMode: 'static',
-      },
-    },
   ],
 };
