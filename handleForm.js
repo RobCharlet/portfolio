@@ -10,7 +10,10 @@ const validator = require('validator');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:8000',
+  credentials: true
+}));
 app.use(cookieParser());
 // validate automatically csrf token
 app.use(csrf({ cookie: true }));

@@ -24,10 +24,9 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
-        // TODO: Replace with your GA4 Measurement ID (format: G-XXXXXXXXXX)
-        // The old Universal Analytics ID (UA-5767008-1) is deprecated
+        // Google Analytics 4 - ID chargé depuis .env
         trackingIds: [
-          'G-XXXXXXXXXX', // Google Analytics 4 / GA4
+          process.env.GATSBY_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX',
         ],
         gtagConfig: {
           anonymize_ip: true,

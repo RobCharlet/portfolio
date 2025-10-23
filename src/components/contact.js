@@ -25,7 +25,7 @@ const ContactForm = () => {
 
   useEffect(() => {
     const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
-    axios.get(`${baseUrl}/csrf-token`).then((response) => {
+    axios.get(`${baseUrl}/csrf-token`, { withCredentials: true }).then((response) => {
       setCsrfToken(response.data.csrfToken)
     })
   }, [])
@@ -44,7 +44,7 @@ const ContactForm = () => {
 
     const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
     axios
-      .post(`${baseUrl}/contact`, { ...values, _csrf: csrfToken })
+      .post(`${baseUrl}/contact`, { ...values, _csrf: csrfToken }, { withCredentials: true })
       .then((response) => {
         actions.setSubmitting(false)
         actions.resetForm()
