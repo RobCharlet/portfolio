@@ -1,25 +1,35 @@
-import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
-import styled from '@emotion/styled';
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import styled from '@emotion/styled'
 import {
   colors,
   radialGrandient,
   darkRadialGrandient,
   darkColors,
   breakpoints,
-  fonts, // Ajoutez cette ligne pour importer les polices
-} from '../utils/styles';
+  fonts,
+} from '../utils/styles'
 
-// Background Image
-const BackgroundSection = styled(BackgroundImage)`
-  background-position: top 20% center;
-  background-size: cover;
-  height: 50vh; /* if you don't want it to take up the full screen, reduce this number */
+// Background Image container
+const BackgroundSection = styled('div')`
+  position: relative;
+  height: 50vh;
+  overflow: hidden;
+
   + * {
     margin-top: 0;
   }
-`;
+  
+  .gatsby-image-wrapper {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+`
 
 const TextBox = styled('header')`
   background: radial-gradient(${radialGrandient});
@@ -82,29 +92,40 @@ const TextBox = styled('header')`
       text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
     }
   }
-`;
+`
 
 const Hero = () => {
   const { image } = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "sniff-outdoors-header.jpg" }) {
-        sharp: childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+        childImageSharp {
+          gatsbyImageData(
+            quality: 90
+            layout: FULL_WIDTH
+            placeholder: BLURRED
+            formats: [AUTO, WEBP]
+          )
         }
       }
     }
-  `);
+  `)
+
+  const imageData = getImage(image)
 
   return (
-    <BackgroundSection tag="header" fluid={image.sharp.fluid}>
+    <BackgroundSection as="header">
+      <GatsbyImage
+        image={imageData}
+        alt="Header background"
+        style={{ position: 'absolute' }}
+        objectPosition="top 20% center"
+      />
       <TextBox>
         <h1>Robin Charlet</h1>
         <p>Développeur Full Stack</p>
       </TextBox>
     </BackgroundSection>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
