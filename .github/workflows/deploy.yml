@@ -25,6 +25,8 @@ jobs:
         run: yarn install
 
       - name: Build Gatsby site
+        env:
+          GATSBY_GA4_MEASUREMENT_ID: ${{ secrets.GATSBY_GA4_MEASUREMENT_ID }}
         run: yarn build
 
       - name: Deploy to Server
