@@ -1,76 +1,17 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import Layout from '../components/layout';
-import ContactForm from '../components/contact';
-import GithubRepo from '../components/github';
-import UseGithub from '../hooks/use-github';
-import { colors, breakpoints, spacing, radius } from '../utils/styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhp, faJs, faSymfony, faDrupal, faNodeJs, faReact } from '@fortawesome/free-brands-svg-icons';
+import { faDrupal, faJs, faNodeJs, faPhp, faReact, faSymfony } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+
+import ContactForm from '../components/contact'
+import GithubRepo from '../components/github'
+import Layout from '../components/layout'
+import { RepoGithub } from '../components/shared/RepoGithub'
+import { Skills } from '../components/shared/Skills'
+import UseGithub from '../hooks/use-github'
 
 // markup
 const IndexPage = () => {
-  const Skills = styled(`ul`)`
-    display: flex;
-    flex-flow: row wrap;
-    padding-left: 0;
-    justify-content: center;
-
-    li {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      list-style: none;
-      color: ${colors.text};
-      padding: ${spacing.md}px;
-      margin: ${spacing.sm}px;
-      background: ${colors.grey};
-      border-radius: ${radius.large}px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      flex: 1 1 30%;
-      max-width: 200px;
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-      }
-
-      @media (min-width: ${breakpoints.tablet}px) {
-        flex: 1 1 20%;
-      }
-
-      @media (min-width: ${breakpoints.desktop}px) {
-        flex: 1 1 15%;
-      }
-
-      svg {
-        font-size: 2rem;
-        margin-bottom: ${spacing.sm}px;
-        color: ${colors.bluePrimary};
-      }
-    }
-  `;
-
-  const RepoGithub = styled(`ul`)`
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    padding-left: 0;
-
-    li {
-      list-style: none;
-      margin-bottom: 2%;
-      flex: 1 1 100%;
-      @media (min-width: ${breakpoints.tablet}px) {
-        flex: 0 0 48%;
-      }
-    }
-  `;
-
-  const githubs = UseGithub();
+  const githubs = UseGithub()
 
   return (
     <Layout>
@@ -88,32 +29,32 @@ const IndexPage = () => {
           support.
         </p>
       </section>
-      <section id="skills">
-        <h2>Compétences</h2>
-        <Skills>
+      <section id="skills" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Compétences</h2>
+        <Skills aria-label="Liste des compétences techniques">
           <li>
-            <FontAwesomeIcon icon={faPhp} />
-            PHP
+            <FontAwesomeIcon icon={faPhp} aria-hidden="true" />
+            <span aria-label="PHP">PHP</span>
           </li>
           <li>
-            <FontAwesomeIcon icon={faJs} />
-            Javascript
+            <FontAwesomeIcon icon={faJs} aria-hidden="true" />
+            <span aria-label="Javascript">Javascript</span>
           </li>
           <li>
-            <FontAwesomeIcon icon={faSymfony} />
-            Symfony 3-5
+            <FontAwesomeIcon icon={faSymfony} aria-hidden="true" />
+            <span aria-label="Symfony versions 3 à 5">Symfony 3-5</span>
           </li>
           <li>
-            <FontAwesomeIcon icon={faDrupal} />
-            Drupal<br /> 7-10
+            <FontAwesomeIcon icon={faDrupal} aria-hidden="true" />
+            <span aria-label="Drupal versions 7 à 10">Drupal<br /> 7-10</span>
           </li>
           <li>
-            <FontAwesomeIcon icon={faNodeJs} />
-            Nest.js
+            <FontAwesomeIcon icon={faNodeJs} aria-hidden="true" />
+            <span aria-label="Nest.js">Nest.js</span>
           </li>
           <li>
-            <FontAwesomeIcon icon={faReact} />
-            Next.js
+            <FontAwesomeIcon icon={faReact} aria-hidden="true" />
+            <span aria-label="Next.js">Next.js</span>
           </li>
         </Skills>
       </section>
@@ -134,3 +75,19 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
+
+export const Head = () => (
+  <>
+    <html lang="fr" />
+    <title>Robin Charlet - Développeur Full Stack</title>
+    <meta name="description" content="Développeur spécialisé dans les technologies web depuis 2004. Expert PHP, Symfony, Drupal, Node.js, Next.js et React." />
+    <meta name="keywords" content="développeur full stack, php, symfony, drupal, node.js, next.js, react, nest.js" />
+    <meta property="og:title" content="Robin Charlet - Développeur Full Stack" />
+    <meta property="og:description" content="Développeur spécialisé dans les technologies web depuis 2004" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.robincharlet.fr/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Robin Charlet - Développeur Full Stack" />
+    <meta name="twitter:description" content="Développeur spécialisé dans les technologies web depuis 2004" />
+  </>
+);

@@ -24,10 +24,11 @@ const ContactForm = () => {
   const [csrfToken, setCsrfToken] = useState('');
 
   useEffect(() => {
-    axios.get('/csrf-token').then((response) => {
-      setCsrfToken(response.data.csrfToken);
-    });
-  }, []);
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
+    axios.get(`${baseUrl}/csrf-token`, { withCredentials: true }).then((response) => {
+      setCsrfToken(response.data.csrfToken)
+    })
+  }, [])
 
   const handleServerResponse = (ok, msg) => {
     setTimeout(() => {
@@ -39,20 +40,21 @@ const ContactForm = () => {
   };
 
   const handleOnSubmit = (values, actions) => {
-    setServerState({ submitting: true, status: null });
+    setServerState({ submitting: true, status: null })
 
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
     axios
-      .post('/contact', { ...values, _csrf: csrfToken })
+      .post(`${baseUrl}/contact`, { ...values, _csrf: csrfToken }, { withCredentials: true })
       .then((response) => {
-        actions.setSubmitting(false);
-        actions.resetForm();
-        handleServerResponse(true, 'Merci ! Votre message a bien été envoyé.');
+        actions.setSubmitting(false)
+        actions.resetForm()
+        handleServerResponse(true, 'Merci ! Votre message a bien été envoyé.')
       })
       .catch((error) => {
-        actions.setSubmitting(false);
-        handleServerResponse(false, 'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.');
-      });
-  };
+        actions.setSubmitting(false)
+        handleServerResponse(false, 'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.')
+      })
+  }
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Votre nom est requis'),

@@ -1,6 +1,5 @@
 import { css, Global } from '@emotion/react';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { colors, darkColors, fonts, breakpoints } from '../utils/styles';
 import Header from '../components/header';
 import Hero from '../components/hero';
@@ -91,11 +90,6 @@ const Layout = ({ children }) => {
           }
         `}
       />
-      <Helmet>
-        <html lang="fr" />
-        <title>Robin Charlet</title>
-        <meta name="description" content="Développeur Full Stack" />
-      </Helmet>
       <Hero />
       <Header />
       <main

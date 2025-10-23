@@ -52,3 +52,11 @@ const NotFoundPage = () => {
 }
 
 export default NotFoundPage
+
+export const Head = () => (
+  <>
+    <html lang="fr" />
+    <title>Page non trouvée - Robin Charlet</title>
+    <meta name="description" content="Page non trouvée" />
+  </>
+)
