@@ -1,33 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import * as Yup from 'yup'
+
 import {
+  ErrorMessageStyled,
   Fieldset,
-  HalfField,
   FullField,
+  HalfField,
   Input,
   Label,
-  Textarea,
-  Submit,
   Status,
-  ErrorMessageStyled
-} from './shared/FormElements';
-import Loader from './shared/Loader';
+  Submit,
+  Textarea,
+} from './shared/FormElements'
+import Loader from './shared/Loader'
 
 const ContactForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha()
   const [serverState, setServerState] = useState({
     submitting: false,
     status: null,
-  });
-
-  const [csrfToken, setCsrfToken] = useState('');
+  })
+  const [csrfToken, setCsrfToken] = useState('')
 
   useEffect(() => {
     const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
-    axios.get(`${baseUrl}/csrf-token`, { withCredentials: true }).then((response) => {
-      setCsrfToken(response.data.csrfToken)
-    })
+    axios
+      .get(`${baseUrl}/csrf-token`, { withCredentials: true })
+      .then((response) => {
+        setCsrfToken(response.data.csrfToken)
+      })
+      .catch((error) => {
+        console.error('Failed to get CSRF token:', error)
+      })
   }, [])
 
   const handleServerResponse = (ok, msg) => {
@@ -35,25 +42,40 @@ const ContactForm = () => {
       setServerState({
         submitting: false,
         status: { ok, msg },
-      });
-    }, 2000); // Délai de 2 secondes
-  };
+      })
+    }, 2000) // Délai de 2 secondes
+  }
 
-  const handleOnSubmit = (values, actions) => {
+  const handleOnSubmit = async (values, actions) => {
     setServerState({ submitting: true, status: null })
 
-    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
-    axios
-      .post(`${baseUrl}/contact`, { ...values, _csrf: csrfToken }, { withCredentials: true })
-      .then((response) => {
-        actions.setSubmitting(false)
-        actions.resetForm()
-        handleServerResponse(true, 'Merci ! Votre message a bien été envoyé.')
-      })
-      .catch((error) => {
-        actions.setSubmitting(false)
-        handleServerResponse(false, 'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.')
-      })
+    if (!executeRecaptcha) {
+      actions.setSubmitting(false)
+      handleServerResponse(false, 'reCAPTCHA non disponible. Merci de réessayer plus tard.')
+      return
+    }
+
+    try {
+      const token = await executeRecaptcha('contact_form')
+      const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
+
+      await axios.post(
+        `${baseUrl}/contact`,
+        {
+          ...values,
+          recaptchaToken: token,
+          _csrf: csrfToken,
+        },
+        { withCredentials: true }
+      )
+
+      actions.setSubmitting(false)
+      actions.resetForm()
+      handleServerResponse(true, 'Merci ! Votre message a bien été envoyé.')
+    } catch (error) {
+      actions.setSubmitting(false)
+      handleServerResponse(false, 'Il y a eu un problème avec le serveur. Merci de réessayer plus tard.')
+    }
   }
 
   const validationSchema = Yup.object({
@@ -63,7 +85,7 @@ const ContactForm = () => {
     text: Yup.string()
       .required('Un message est requis')
       .min(50, 'Le message doit contenir au moins 50 caractères'),
-  });
+  })
 
   return (
     <Formik
@@ -144,7 +166,7 @@ const ContactForm = () => {
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
-export default ContactForm;
+export default ContactForm

@@ -1,48 +1,55 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# Portfolio - Robin Charlet
 
-## 🚀 Quick start
+Portfolio personnel développé avec Gatsby, TypeScript et tests automatisés.
 
-1.  **Create a Gatsby site.**
+## 🚀 Démarrage rapide
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+### Installation
+```bash
+yarn install
+```
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+### Développement
+```bash
+yarn develop
+```
 
-2.  **Start developing.**
+Le site sera accessible sur http://localhost:8000
 
-    Navigate into your new site’s directory and start it up.
+### Build production
+```bash
+yarn build
+```
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+## 🧪 Tests
 
-3.  **Open the code and start customizing!**
+### Tests d'accessibilité (Jest)
+```bash
+yarn test
+yarn test:watch
+yarn test:coverage
+```
 
-    Your site is now running at http://localhost:8000!
+### Tests E2E (Playwright)
+```bash
+yarn test:e2e
+yarn test:e2e:ui
+yarn test:e2e:working
+```
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+## 📚 Documentation
 
-4.  **Learn more**
+La documentation technique complète est disponible dans Notion :
+- Tests Playwright
+- Tests d'API
+- Guide de déploiement
+- Configuration serveur Express
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+## 🛠️ Technologies
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+- **Gatsby** - Framework React
+- **TypeScript** - Typage statique
+- **Playwright** - Tests E2E
+- **Jest** - Tests unitaires
+- **Express** - Serveur API
+- **reCAPTCHA v3** - Protection anti-spam

@@ -7,7 +7,7 @@ module.exports = {
     {
       prefix: '/csrf-token',
       url: 'http://localhost:3000',
-    }
+    },
   ],
   siteMetadata: {
     title: 'Robin Charlet - Développeur Full Stack',
@@ -20,6 +20,7 @@ module.exports = {
     },
   },
   plugins: [
+    'gatsby-plugin-typescript',
     'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-plugin-google-gtag',
