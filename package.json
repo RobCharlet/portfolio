@@ -20,7 +20,17 @@
     "codegen:watch": "graphql-codegen --config codegen.yml --watch",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:basic": "playwright test --config=playwright.config.simple.ts tests/basic.spec.ts",
+    "test:e2e:basic:ui": "playwright test --config=playwright.config.simple.ts --ui tests/basic.spec.ts",
+    "test:e2e:working": "playwright test --config=playwright.config.simple.ts tests/basic.spec.ts tests/portfolio.spec.ts",
+    "test:e2e:working:ui": "playwright test --config=playwright.config.simple.ts --ui tests/basic.spec.ts tests/portfolio.spec.ts",
+    "test:e2e:api": "playwright test --config=playwright.config.simple.ts tests/api-simple.spec.ts",
+    "test:e2e:api:ui": "playwright test --config=playwright.config.simple.ts --ui tests/api-simple.spec.ts"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -73,6 +83,7 @@
     "@graphql-codegen/typescript": "^5.0.2",
     "@graphql-codegen/typescript-operations": "^5.0.2",
     "@netlify/functions": "^5.0.1",
+    "@playwright/test": "^1.56.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -96,6 +107,7 @@
     "jest-axe": "^10.0.0",
     "jest-environment-jsdom": "^30.2.0",
     "netlify-cli": "^23.9.4",
+    "playwright": "^1.56.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
