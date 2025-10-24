@@ -16,8 +16,6 @@
     "analyze": "ANALYZE_BUNDLE_SIZE=true gatsby build",
     "server": "ts-node server.ts",
     "server:dev": "ts-node-dev --respawn server.ts",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:watch": "graphql-codegen --config codegen.yml --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -78,10 +76,6 @@
     "@babel/preset-env": "^7.23.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^6.0.1",
-    "@graphql-codegen/typed-document-node": "^6.0.2",
-    "@graphql-codegen/typescript": "^5.0.2",
-    "@graphql-codegen/typescript-operations": "^5.0.2",
     "@netlify/functions": "^5.0.1",
     "@playwright/test": "^1.56.1",
     "@testing-library/dom": "^10.4.1",
