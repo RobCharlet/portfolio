@@ -44,8 +44,8 @@ cp env.example _.env.production
 
 Variables requises :
 ```env
-GATSBY_RECAPTCHA_SITE_KEY=***REMOVED***
-RECAPTCHA_SECRET_KEY=***REMOVED***
+GATSBY_RECAPTCHA_SITE_KEY=6LcxVPUrAAAAAAzno3kmI9f_ZlaGXsz9m3EPq4o4
+RECAPTCHA_SECRET_KEY=6LcxVPUrAAAAAESrCl4_9pDrKFEvsZZvQwFW4ob6
 MAIL_HOST=smtp.laposte.net
 MAIL_PORT=587
 MAIL_USER=robin.charlet@laposte.net
