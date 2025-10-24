@@ -1,4 +1,14 @@
 module.exports = {
+  proxy: [
+    {
+      prefix: '/contact',
+      url: 'http://localhost:3000',
+    },
+    {
+      prefix: '/csrf-token',
+      url: 'http://localhost:3000',
+    },
+  ],
   siteMetadata: {
     title: 'Robin Charlet - Développeur Full Stack',
     description: 'Développeur spécialisé dans les technologies web depuis 2004. Expert PHP, Symfony, Drupal, Node.js, Next.js et React.',

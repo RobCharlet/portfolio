@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
@@ -23,6 +23,19 @@ const ContactForm = () => {
     submitting: false,
     status: null,
   })
+  const [csrfToken, setCsrfToken] = useState('')
+
+  useEffect(() => {
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
+    axios
+      .get(`${baseUrl}/csrf-token`, { withCredentials: true })
+      .then((response) => {
+        setCsrfToken(response.data.csrfToken)
+      })
+      .catch((error) => {
+        console.error('Failed to get CSRF token:', error)
+      })
+  }, [])
 
   const handleServerResponse = (ok, msg) => {
     setTimeout(() => {
@@ -44,11 +57,17 @@ const ContactForm = () => {
 
     try {
       const token = await executeRecaptcha('contact_form')
+      const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
 
-      await axios.post('/.netlify/functions/contact', {
-        ...values,
-        recaptchaToken: token,
-      })
+      await axios.post(
+        `${baseUrl}/contact`,
+        {
+          ...values,
+          recaptchaToken: token,
+          _csrf: csrfToken,
+        },
+        { withCredentials: true }
+      )
 
       actions.setSubmitting(false)
       actions.resetForm()
