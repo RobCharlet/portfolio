@@ -35,8 +35,9 @@ module.exports = {
           send_page_view: true,
         },
         pluginConfig: {
-          head: false, // Load script in body to avoid ERR_UNSAFE_REDIRECT
+          head: true, // Load script in head to avoid ERR_UNSAFE_REDIRECT
           respectDNT: true,
+          origin: 'https://www.googletagmanager.com',
           // Delay gtag loading for better performance
           delayOnRouteUpdate: 0,
         },
