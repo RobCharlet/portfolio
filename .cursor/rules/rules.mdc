@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+ Always use the context7 MCP to search for documentation, and the GitHub MCP for GitHub-related tasks.
+ In GitHub, for a hotfix always create a new branch or pick up the one you used for development, and send a PR when you’re fixing a branch that has already been merged. NEVER USE MAIN FOR HOTFIXES OR FEATURES.
+ Never merge your own PR without asking for a review.
