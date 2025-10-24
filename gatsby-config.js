@@ -35,7 +35,7 @@ module.exports = {
           send_page_view: true,
         },
         pluginConfig: {
-          head: true,
+          head: false, // Load script in body to avoid ERR_UNSAFE_REDIRECT
           respectDNT: true,
           // Delay gtag loading for better performance
           delayOnRouteUpdate: 0,
