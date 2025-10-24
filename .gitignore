@@ -11,3 +11,6 @@ yarn-error.log
 .env
 .env.*
 _.env.*
+
+# Playwright reports
+playwright-report/
