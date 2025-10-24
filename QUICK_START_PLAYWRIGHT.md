@@ -65,7 +65,7 @@ yarn test:e2e:basic:ui
 
 ## 🔧 Configuration
 
-### Configuration simple (`playwright.config.simple.ts`)
+### Configuration par défaut (`playwright.config.ts`)
 - **1 navigateur** : Chrome uniquement
 - **Plus rapide** pour le développement
 - **Parfait** pour les tests de base
