@@ -27,6 +27,7 @@ jobs:
       - name: Build Gatsby site
         env:
           GATSBY_GA4_MEASUREMENT_ID: ${{ secrets.GATSBY_GA4_MEASUREMENT_ID }}
+          GATSBY_RECAPTCHA_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_SITE_KEY }}
         run: yarn build
 
       - name: Deploy to Server
