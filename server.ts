@@ -7,7 +7,9 @@ import express from 'express'
 import nodemailer from 'nodemailer'
 import validator from 'validator'
 
-dotenv.config({ path: './.env.production' })
+// Charger le bon fichier d'environnement selon l'environnement
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development'
+dotenv.config({ path: envFile })
 
 const app = express()
 
@@ -46,6 +48,11 @@ transporter.verify((error) => {
 
 // Verify reCAPTCHA token
 const verifyRecaptcha = async (token: string): Promise<boolean> => {
+  // En développement, on accepte toujours le token
+  if (process.env.NODE_ENV !== 'production') {
+    return true
+  }
+
   try {
     const response = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',
