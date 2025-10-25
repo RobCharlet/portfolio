@@ -30,6 +30,9 @@ jobs:
           GATSBY_RECAPTCHA_SITE_KEY: ${{ secrets.GATSBY_RECAPTCHA_SITE_KEY }}
         run: yarn build
 
+      - name: Build Node.js server
+        run: yarn build:server
+
       - name: Deploy to Server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -43,6 +46,21 @@ jobs:
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -avz --exclude '.env.production' --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
           rsync -avz --delete node_modules/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/node_modules
-          scp server.ts $SERVER_USER@$SERVER_HOST:$SERVER_PATH/server.ts
-          scp tsconfig.json $SERVER_USER@$SERVER_HOST:$SERVER_PATH/tsconfig.json
+          rsync -avz --delete dist/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/dist
+          scp ecosystem.config.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/ecosystem.config.js
+          scp package.json $SERVER_USER@$SERVER_HOST:$SERVER_PATH/package.json
+
+      - name: Restart PM2 server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_PATH: ${{ secrets.SERVER_PATH }}
+        run: |
+          ssh $SERVER_USER@$SERVER_HOST << 'EOF'
+            cd $SERVER_PATH
+            pm2 delete handleForm || true
+            pm2 start ecosystem.config.js --env production
+            pm2 save
+          EOF
           
