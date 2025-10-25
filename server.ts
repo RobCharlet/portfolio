@@ -41,6 +41,12 @@ const transporter = nodemailer.createTransport({
 transporter.verify((error) => {
   if (error) {
     console.error('Mail server connection error:', error)
+    console.error('Mail config:', {
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      user: process.env.MAIL_USER,
+      // Ne pas logger le mot de passe
+    })
   } else {
     console.log('Mail server ready to send messages')
   }
@@ -80,6 +86,13 @@ app.get('/csrf-token', (req, res) => {
 // Contact form endpoint
 app.post('/contact', async (req, res) => {
   try {
+    console.log('Contact form submission:', {
+      name: req.body.name,
+      mail: req.body.mail,
+      subject: req.body.subject,
+      hasRecaptchaToken: !!req.body.recaptchaToken
+    })
+    
     const { name, mail, subject, text, recaptchaToken } = req.body
 
     // Validate required fields
@@ -114,6 +127,7 @@ app.post('/contact', async (req, res) => {
       `,
     })
 
+    console.log('Email sent successfully to:', contactAddress)
     return res.status(200).json({ message: 'Email sent successfully' })
   } catch (error) {
     console.error('Error sending email:', error)

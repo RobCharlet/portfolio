@@ -1,6 +1,21 @@
 import React from 'react'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
+export const onRenderBody = ({ setHeadComponents }) => {
+  const recaptchaKey = process.env.GATSBY_RECAPTCHA_SITE_KEY
+  
+  if (recaptchaKey) {
+    setHeadComponents([
+      <script
+        key="recaptcha-script"
+        src={`https://www.google.com/recaptcha/api.js?render=${recaptchaKey}`}
+        async
+        defer
+      />
+    ])
+  }
+}
+
 export const wrapRootElement = ({ element }) => {
   const recaptchaKey = process.env.GATSBY_RECAPTCHA_SITE_KEY
 
