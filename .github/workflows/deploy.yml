@@ -57,10 +57,7 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_PATH: ${{ secrets.SERVER_PATH }}
         run: |
-          ssh $SERVER_USER@$SERVER_HOST << 'EOF'
-            cd $SERVER_PATH
-            pm2 delete handleForm || true
-            pm2 start ecosystem.config.js --env production
-            pm2 save
-          EOF
+          eval $(ssh-agent -s)
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+          ssh $SERVER_USER@$SERVER_HOST "cd $SERVER_PATH && pm2 delete handleForm || true && pm2 start ecosystem.config.js --env production && pm2 save"
           
