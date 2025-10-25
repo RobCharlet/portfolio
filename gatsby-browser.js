@@ -3,6 +3,9 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 export const wrapRootElement = ({ element }) => {
   const recaptchaKey = process.env.GATSBY_RECAPTCHA_SITE_KEY
+  
+  // Debug: vérifier la valeur
+  console.log('GATSBY_RECAPTCHA_SITE_KEY:', recaptchaKey)
 
   if (!recaptchaKey) {
     console.warn('GATSBY_RECAPTCHA_SITE_KEY is not defined')
