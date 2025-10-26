@@ -13,7 +13,21 @@ export const wrapRootElement = ({ element }) => {
   }
 
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={recaptchaKey}>
+    <GoogleReCaptchaProvider 
+      reCaptchaKey={recaptchaKey}
+      useRecaptchaNet={true}
+      scriptProps={{
+        async: true,
+        defer: true,
+        appendTo: 'head'
+      }}
+      container={{
+        parameters: {
+          badge: 'inline',
+          theme: 'light'
+        }
+      }}
+    >
       {element}
     </GoogleReCaptchaProvider>
   )
