@@ -16,7 +16,7 @@ export const wrapRootElement = ({ element }) => {
   }
 
   return (
-    <GoogleReCaptchaProvider 
+    <GoogleReCaptchaProvider
       reCaptchaKey={recaptchaKey}
       useRecaptchaNet={true}
       scriptProps={{
@@ -35,4 +35,3 @@ export const wrapRootElement = ({ element }) => {
     </GoogleReCaptchaProvider>
   )
 }
-
