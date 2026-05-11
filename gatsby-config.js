@@ -152,11 +152,7 @@ module.exports = {
             "https://www.gstatic.com",
             "https://www.google.com",
             "https://www.recaptcha.net",
-            "https://www.gstatic.com/recaptcha/",
-            "https://www.google.com/recaptcha/",
-            "https://www.google.com/recaptcha/api.js",
-            "https://www.google.com/recaptcha/api2/",
-            "https://www.google.com/recaptcha/enterprise/"
+            "https://www.recaptcha.net/recaptcha/"
           ],
           'style-src': [
             "'self'",
