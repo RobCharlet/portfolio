@@ -6,7 +6,6 @@ import {
   colors,
   radialGrandient,
   darkRadialGrandient,
-  darkColors,
   breakpoints,
   fonts,
 } from '../utils/styles'
@@ -88,8 +87,8 @@ const TextBox = styled('header')`
     background: radial-gradient(${darkRadialGrandient});
     h1,
     p {
-      color: ${darkColors.extraLight};
-      text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+      color: ${colors.extraLight};
+      text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.8);
     }
   }
 `
@@ -100,9 +99,9 @@ const Hero = () => {
       image: file(relativePath: { eq: "sniff-outdoors-header.jpg" }) {
         childImageSharp {
           gatsbyImageData(
-            quality: 90
+            quality: 95
             layout: FULL_WIDTH
-            placeholder: BLURRED
+            placeholder: TRACED_SVG
             formats: [AUTO, WEBP]
           )
         }
