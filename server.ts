@@ -28,29 +28,34 @@ app.use(csrf({ cookie: true }))
 
 const contactAddress = process.env.MAIL_CONTACT
 
-const transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: Number(process.env.MAIL_PORT),
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASSWORD,
-  },
-})
-
-// Verify connection configuration
-transporter.verify((error) => {
-  if (error) {
-    console.error('Mail server connection error:', error)
-    console.error('Mail config:', {
+// Use JSON transport in development to avoid real SMTP
+const transporter = process.env.NODE_ENV === 'production'
+  ? nodemailer.createTransport({
       host: process.env.MAIL_HOST,
-      port: process.env.MAIL_PORT,
-      user: process.env.MAIL_USER,
-      // Ne pas logger le mot de passe
+      port: Number(process.env.MAIL_PORT),
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD,
+      },
     })
-  } else {
-    console.log('Mail server ready to send messages')
-  }
-})
+  : nodemailer.createTransport({ jsonTransport: true })
+
+// Verify connection configuration only in production
+if (process.env.NODE_ENV === 'production') {
+  transporter.verify((error) => {
+    if (error) {
+      console.error('Mail server connection error:', error)
+      console.error('Mail config:', {
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT,
+        user: process.env.MAIL_USER,
+        // Ne pas logger le mot de passe
+      })
+    } else {
+      console.log('Mail server ready to send messages')
+    }
+  })
+}
 
 // Verify reCAPTCHA token
 const verifyRecaptcha = async (token: string): Promise<boolean> => {
@@ -135,8 +140,8 @@ app.post('/contact', async (req, res) => {
   }
 })
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
+const PORT = Number(process.env.PORT) || 3000
+app.listen(PORT, '127.0.0.1', () => {
   console.log(`Server running on port ${PORT}`)
 })
 
