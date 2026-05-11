@@ -53,18 +53,10 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: [
-    {
-      command: 'yarn develop',
-      url: 'http://localhost:8000',
-      reuseExistingServer: !process.env.CI,
-      timeout: 120 * 1000, // 2 minutes timeout for Gatsby to start
-    },
-    {
-      command: 'yarn server:dev',
-      url: 'http://localhost:3000',
-      reuseExistingServer: !process.env.CI,
-      timeout: 30 * 1000, // 30 seconds timeout for Express server
-    }
-  ],
+  webServer: {
+    command: 'yarn develop',
+    url: 'http://localhost:8000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000, // 2 minutes timeout for Gatsby to start
+  },
 })
