@@ -137,5 +137,51 @@ module.exports = {
       },
       __key: 'pages',
     },
+    {
+      resolve: 'gatsby-plugin-csp',
+      options: {
+        mergeScriptHashes: true,
+        mergeStyleHashes: true,
+        directives: {
+          'script-src': [
+            "'self'",
+            "'unsafe-inline'",
+            "'unsafe-eval'", // Nécessaire pour Gatsby
+            "https://www.googletagmanager.com",
+            "https://www.google-analytics.com",
+            "https://www.gstatic.com",
+            "https://www.google.com",
+            "https://www.recaptcha.net",
+            "https://www.recaptcha.net/recaptcha/"
+          ],
+          'style-src': [
+            "'self'",
+            "'unsafe-inline'",
+            "https://www.gstatic.com",
+            "https://www.google.com"
+          ],
+          'img-src': [
+            "'self'",
+            "data:",
+            "https://www.google-analytics.com",
+            "https://www.googletagmanager.com",
+            "https://www.gstatic.com",
+            "https://www.google.com"
+          ],
+          'connect-src': [
+            "'self'",
+            "https://www.google-analytics.com",
+            "https://www.googletagmanager.com",
+            "https://www.google.com",
+            "https://www.recaptcha.net"
+          ],
+          'frame-src': [
+            "'self'",
+            "https://www.google.com",
+            "https://www.recaptcha.net"
+          ]
+        }
+      }
+    },
   ],
 };
