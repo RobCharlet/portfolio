@@ -73,16 +73,12 @@ jobs:
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
           rsync -az --delete --info=stats2 \
             --exclude '.env.production' \
-            --exclude '.deployed-yarn.lock' \
-            --exclude 'dist' \
-            --exclude 'ecosystem.config.js' \
-            --exclude 'node_modules' \
-            --exclude 'package.json' \
-            --exclude 'yarn.lock' \
             public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
+          rsync -az --delete --info=stats2 \
+            --exclude 'node_modules/.cache' \
+            node_modules/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/node_modules
           rsync -az --delete --info=stats2 dist/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/dist
-          scp ecosystem.config.js package.json yarn.lock $SERVER_USER@$SERVER_HOST:$SERVER_PATH/
-          ssh $SERVER_USER@$SERVER_HOST "export NVM_DIR=\"\$HOME/.nvm\" && [ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\" && cd $SERVER_PATH && if [ ! -d node_modules ] || [ ! -f .deployed-yarn.lock ] || ! cmp -s yarn.lock .deployed-yarn.lock; then command -v yarn >/dev/null 2>&1 || npm install -g yarn@1.22.22; yarn install --production --frozen-lockfile --prefer-offline && cp yarn.lock .deployed-yarn.lock; fi"
+          scp ecosystem.config.js package.json $SERVER_USER@$SERVER_HOST:$SERVER_PATH/
 
       - name: Restart PM2 server
         env:
@@ -93,4 +89,6 @@ jobs:
         run: |
           eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-          ssh $SERVER_USER@$SERVER_HOST "export NVM_DIR=\"\$HOME/.nvm\" && [ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\" && cd $SERVER_PATH && (pm2 reload ecosystem.config.js --env production --update-env || pm2 start ecosystem.config.js --env production) && pm2 save"
+          ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=10 \
+            $SERVER_USER@$SERVER_HOST \
+            "cd $SERVER_PATH && (pm2 reload ecosystem.config.js --env production --update-env || pm2 start ecosystem.config.js --env production) && pm2 save"
