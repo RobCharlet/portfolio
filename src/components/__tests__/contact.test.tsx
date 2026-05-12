@@ -6,10 +6,13 @@ import ContactForm from '../contact'
 
 expect.extend(toHaveNoViolations)
 
-// Mock axios
-jest.mock('axios')
-
 describe('ContactForm', () => {
+  beforeEach(() => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ csrfToken: 'test-token' }),
+    }) as unknown as typeof fetch
+  })
   it('should not have any accessibility violations', async () => {
     const { container } = render(<ContactForm />)
     const results = await axe(container)
