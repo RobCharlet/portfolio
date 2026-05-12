@@ -1,4 +1,3 @@
-import axios from 'axios'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import csrf from 'csurf'
@@ -60,18 +59,17 @@ const verifyRecaptcha = async (token: string): Promise<boolean> => {
   }
 
   try {
-    const response = await axios.post(
-      'https://www.google.com/recaptcha/api/siteverify',
-      null,
-      {
-        params: {
-          secret: process.env.RECAPTCHA_SECRET_KEY,
-          response: token,
-        },
-      }
+    const params = new URLSearchParams({
+      secret: process.env.RECAPTCHA_SECRET_KEY ?? '',
+      response: token,
+    })
+    const response = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?${params}`,
+      { method: 'POST' }
     )
-
-    return response.data.success && response.data.score >= 0.5
+    if (!response.ok) return false
+    const data = await response.json() as { success?: boolean; score?: number }
+    return !!data.success && (data.score ?? 0) >= 0.5
   } catch (error) {
     console.error('reCAPTCHA verification failed:', error)
     return false

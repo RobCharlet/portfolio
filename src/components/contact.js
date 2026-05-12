@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import * as Yup from 'yup'
@@ -27,11 +26,12 @@ const ContactForm = () => {
 
   useEffect(() => {
     const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
-    axios
-      .get(`${baseUrl}/csrf-token`, { withCredentials: true })
+    fetch(`${baseUrl}/csrf-token`, { credentials: 'include' })
       .then((response) => {
-        setCsrfToken(response.data.csrfToken)
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        return response.json()
       })
+      .then((data) => setCsrfToken(data.csrfToken))
       .catch((error) => {
         console.error('Failed to get CSRF token:', error)
       })
@@ -59,15 +59,13 @@ const ContactForm = () => {
       const token = await executeRecaptcha('contact_form')
       const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : ''
 
-      await axios.post(
-        `${baseUrl}/contact`,
-        {
-          ...values,
-          recaptchaToken: token,
-          _csrf: csrfToken,
-        },
-        { withCredentials: true }
-      )
+      const response = await fetch(`${baseUrl}/contact`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, recaptchaToken: token, _csrf: csrfToken }),
+      })
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
 
       actions.setSubmitting(false)
       actions.resetForm()
