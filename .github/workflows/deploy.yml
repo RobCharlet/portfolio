@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,8 +25,31 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn@1.22.22
 
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Yarn cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-
+
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: Restore Gatsby cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache
+            public
+          key: gatsby-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          restore-keys: |
+            gatsby-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
+            gatsby-${{ runner.os }}-
 
       - name: Build Gatsby site
         env:
@@ -40,15 +67,22 @@ jobs:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_PATH: ${{ secrets.SERVER_PATH }}
         run: |
-          eval $(ssh-agent -s)  # Démarrer l'agent SSH
+          eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
           mkdir -p ~/.ssh
           ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
-          rsync -avz --exclude '.env.production' --delete public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
-          rsync -avz --delete node_modules/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/node_modules
-          rsync -avz --delete dist/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/dist
-          scp ecosystem.config.js $SERVER_USER@$SERVER_HOST:$SERVER_PATH/ecosystem.config.js
-          scp package.json $SERVER_USER@$SERVER_HOST:$SERVER_PATH/package.json
+          rsync -az --delete --info=stats2 \
+            --exclude '.env.production' \
+            --exclude '.deployed-yarn.lock' \
+            --exclude 'dist' \
+            --exclude 'ecosystem.config.js' \
+            --exclude 'node_modules' \
+            --exclude 'package.json' \
+            --exclude 'yarn.lock' \
+            public/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH
+          rsync -az --delete --info=stats2 dist/ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/dist
+          scp ecosystem.config.js package.json yarn.lock $SERVER_USER@$SERVER_HOST:$SERVER_PATH/
+          ssh $SERVER_USER@$SERVER_HOST "cd $SERVER_PATH && if [ ! -d node_modules ] || [ ! -f .deployed-yarn.lock ] || ! cmp -s yarn.lock .deployed-yarn.lock; then command -v yarn >/dev/null 2>&1 || npm install -g yarn@1.22.22; yarn install --production --frozen-lockfile --prefer-offline && cp yarn.lock .deployed-yarn.lock; fi"
 
       - name: Restart PM2 server
         env:
@@ -59,4 +93,4 @@ jobs:
         run: |
           eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-          ssh $SERVER_USER@$SERVER_HOST "cd $SERVER_PATH && pm2 delete handleForm || true && pm2 start ecosystem.config.js --env production && pm2 save"
+          ssh $SERVER_USER@$SERVER_HOST "cd $SERVER_PATH && (pm2 reload ecosystem.config.js --env production --update-env || pm2 start ecosystem.config.js --env production) && pm2 save"
