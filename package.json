@@ -73,6 +73,9 @@
   },
   "resolutions": {
     "axios": "^1.16.0",
+    "cookie": "^0.7.2",
+    "path-to-regexp": "^0.1.13",
+    "webpack": "^5.104.0",
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.23.0",
     "@babel/plugin-transform-modules-systemjs": "^7.29.4",
