@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn test *)",
+      "Bash(yarn why *)",
+      "Bash(npm view *)",
+      "Bash(yarn --version)",
+      "Bash(python3 -c \"import sys,json; vs=[v for v in json.load\\(sys.stdin\\) if v.startswith\\('3.'\\)]; print\\(vs[-1] if vs else 'none'\\)\")",
+      "Bash(python3 -c \"import sys,json; vs=[v for v in json.load\\(sys.stdin\\) if v.startswith\\('4.'\\)]; print\\(vs[-1] if vs else 'none'\\)\")",
+      "Bash(yarn upgrade *)",
+      "Bash(python3 -c \"import sys,json; vs=[v for v in json.load\\(sys.stdin\\) if v.startswith\\('1.'\\) and 'rc' not in v and 'beta' not in v and 'alpha' not in v]; print\\(vs[-1]\\)\")",
+      "Bash(python3 -c \"import sys,json; vs=[v for v in json.load\\(sys.stdin\\) if v.startswith\\('4.'\\)]; print\\(vs[-1]\\)\")",
+      "Bash(python3 -c \"import sys,json; vs=[v for v in json.load\\(sys.stdin\\) if v.startswith\\('10.'\\)]; print\\(vs[-1]\\)\")",
+      "Bash(python3 -c \"import sys,json; vs=[v for v in json.load\\(sys.stdin\\) if v.startswith\\('3.'\\)]; print\\(vs[-1]\\)\")",
+      "Bash(yarn install *)"
+    ]
+  }
+}
