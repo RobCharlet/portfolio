@@ -1,0 +1,22 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # 0 disables routine version-update PRs. Security-update PRs are exempt
+    # from this limit and keep being opened.
+    open-pull-requests-limit: 0
+    groups:
+      # One PR per batch instead of one per advisory.
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+    commit-message:
+      prefix: chore
+      include: scope
+    labels:
+      - dependencies
+      - security
